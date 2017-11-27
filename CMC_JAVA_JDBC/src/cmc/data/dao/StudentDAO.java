@@ -13,6 +13,18 @@ import cmc.data.model.Student;
 import cmc.data.sqlserver.ConnectDB;
 
 public class StudentDAO {
+	/**
+	 * @description: handle insert to db
+	 * @create_date: Nov 27, 2017
+	 * @author: Ha Quang Trung CMC RDC-Traniner
+	 * @modify_date: Nov 27, 2017
+	 * @modifier: Ha Quang Trung
+	 * @param student
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @exception: 
+	 */
 	public boolean insert(Student student) throws ClassNotFoundException, SQLException
 	{
 		Connection connect = ConnectDB.Connect();
@@ -37,6 +49,17 @@ public class StudentDAO {
 		return true;
 	}
 	
+	/**
+	 * @description: get all student from tbl student
+	 * @create_date: Nov 27, 2017
+	 * @author: Ha Quang Trung CMC RDC-Traniner
+	 * @modify_date: Nov 27, 2017
+	 * @modifier: Ha Quang Trung
+	 * @param sql
+	 * @return
+	 * @throws SQLException
+	 * @exception: 
+	 */
 	public List<Student> getList(String sql) throws SQLException
 	{
 		Connection connect;
@@ -65,6 +88,18 @@ public class StudentDAO {
 			return null;
 		}
 	}
+	/**
+	 * @description: 
+	 * @create_date: Nov 27, 2017
+	 * @author: Ha Quang Trung CMC RDC-Traniner
+	 * @modify_date: Nov 27, 2017
+	 * @modifier: Ha Quang Trung
+	 * @param sql
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @exception: 
+	 */
 	public List<Classes> getListClasses(String sql) throws ClassNotFoundException, SQLException {
 		Connection connect;
 		connect = ConnectDB.Connect();
