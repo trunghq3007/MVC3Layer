@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import cmc.data.model.Classes;
 import cmc.data.model.Student;
 import cmc.data.sqlserver.ConnectDB;
 
@@ -23,10 +22,9 @@ public class StudentDAO {
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
-	 * @exception: 
+	 * @exception:
 	 */
-	public boolean insert(Student student) throws ClassNotFoundException, SQLException
-	{
+	public boolean insert(Student student) throws ClassNotFoundException, SQLException {
 		Connection connect = ConnectDB.Connect();
 		String sql = "Insert into Student Values(?,?,?,?)";
 		PreparedStatement prepare = connect.prepareStatement(sql);
@@ -41,14 +39,12 @@ public class StudentDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-		finally
-		{
+		} finally {
 			connect.close();
 		}
 		return true;
 	}
-	
+
 	/**
 	 * @description: get all student from tbl student
 	 * @create_date: Nov 27, 2017
@@ -58,21 +54,19 @@ public class StudentDAO {
 	 * @param sql
 	 * @return
 	 * @throws SQLException
-	 * @exception: 
+	 * @exception:
 	 */
-	public List<Student> getList(String sql) throws SQLException
-	{
+	public List<Student> getList(String sql) throws SQLException {
 		Connection connect;
-		//ConnectDB connectDB = new ConnectDB();
+		// ConnectDB connectDB = new ConnectDB();
 		try {
 			connect = ConnectDB.Connect();
 			List<Student> list = new ArrayList<Student>();
-			//Statement creation
+			// Statement creation
 			Statement statement = connect.createStatement();
-			//for retrieve data
+			// for retrieve data
 			ResultSet rs = statement.executeQuery(sql);
-			while(rs.next())
-			{
+			while (rs.next()) {
 				Student student = new Student();
 				student.setStudentId(rs.getInt("studentId"));
 				student.setFullName(rs.getString("fullName"));
@@ -88,43 +82,5 @@ public class StudentDAO {
 			return null;
 		}
 	}
-	/**
-	 * @description: 
-	 * @create_date: Nov 27, 2017
-	 * @author: Ha Quang Trung CMC RDC-Traniner
-	 * @modify_date: Nov 27, 2017
-	 * @modifier: Ha Quang Trung
-	 * @param sql
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @exception: 
-	 */
-	public List<Classes> getListClasses(String sql) throws ClassNotFoundException, SQLException {
-		Connection connect;
-		connect = ConnectDB.Connect();
-		List<Classes> list = new ArrayList<Classes>();
-		//Statement creation
-		Statement statement = connect.createStatement();
-		//for retrieve data
-		try {
-			ResultSet rs = statement.executeQuery(sql);
-			while(rs.next())
-			{
-				Classes class1 = new Classes();
-				class1.setClassId(rs.getString("ClassId"));
-				class1.setClassName(rs.getString("className"));
-				class1.setNote(rs.getString("note"));
-				list.add(class1);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		finally
-		{
-			connect.close();
-		}
-		return list;
-	}
+
 }
