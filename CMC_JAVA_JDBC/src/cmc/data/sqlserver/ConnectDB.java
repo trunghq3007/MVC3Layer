@@ -12,16 +12,11 @@ import java.sql.*;
  */
 public class ConnectDB {
 	static String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	static String ConnectionURL = "jdbc:sqlserver://localhost:1433"
-	       + ";instance=SQLEXPRESS;databaseName=CSD-RDC;";
-	static String userName = "sa";
-	static String passWord = "1234567";
+	static String userName = "";
+	static String passWord = "";
 	static String URL ="jdbc:sqlserver://localhost:1433"
 	       + ";instance=SQLEXPRESS;databaseName=CSD-RDC;integratedSecurity=true;";
 	
-	
-	/*static String ConnectionURLOther = "jdbc:sqlserver://localhost:1433"
-		       + ";instance=SQLEXPRESS;databaseName=CSD-RDC;";*/
 	/**
 	 * Method return connection database
 	 * @throws ClassNotFoundException 
@@ -32,7 +27,7 @@ public class ConnectDB {
 		//load driver
 		Class.forName(Driver);
 		//get connection
-		Connection cn = DriverManager.getConnection(ConnectionURL,null,null);
+		Connection cn = DriverManager.getConnection(URL,null,null);
 		return cn;
 	}
 

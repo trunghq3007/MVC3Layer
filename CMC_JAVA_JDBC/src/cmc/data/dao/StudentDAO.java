@@ -71,7 +71,7 @@ public class StudentDAO {
 				student.setStudentId(rs.getInt("studentId"));
 				student.setFullName(rs.getString("fullName"));
 				student.setAddress(rs.getString("address"));
-				student.setAge(rs.getInt("Age"));
+				student.setAge(rs.getInt("age"));
 				list.add(student);
 			}
 			connect.close();
