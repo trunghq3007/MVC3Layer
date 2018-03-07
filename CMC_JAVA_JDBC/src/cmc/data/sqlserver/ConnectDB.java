@@ -27,7 +27,7 @@ public class ConnectDB {
 		//load driver
 		Class.forName(Driver);
 		//get connection
-		Connection cn = DriverManager.getConnection(URL,null,null);
+		Connection cn = DriverManager.getConnection(URL,userName,passWord);
 		return cn;
 	}
 
