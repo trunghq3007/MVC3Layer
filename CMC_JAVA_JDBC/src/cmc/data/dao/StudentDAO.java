@@ -25,7 +25,7 @@ public class StudentDAO {
 	 * @exception:
 	 */
 	public boolean insert(Student student) throws ClassNotFoundException, SQLException {
-		Connection connect = ConnectDB.Connect();
+		Connection connect = ConnectDB.connect();
 		String sql = "Insert into Student Values(?,?,?,?)";
 		PreparedStatement prepare = connect.prepareStatement(sql);
 		connect.setAutoCommit(false);
@@ -60,7 +60,7 @@ public class StudentDAO {
 		Connection connect;
 		// ConnectDB connectDB = new ConnectDB();
 		try {
-			connect = ConnectDB.Connect();
+			connect = ConnectDB.connect();
 			List<Student> list = new ArrayList<Student>();
 			// Statement creation
 			Statement statement = connect.createStatement();
@@ -74,6 +74,8 @@ public class StudentDAO {
 				student.setAge(rs.getInt("age"));
 				list.add(student);
 			}
+			rs.close();
+			statement.close();
 			connect.close();
 			return list;
 		} catch (ClassNotFoundException e) {

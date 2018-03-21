@@ -18,16 +18,12 @@ public class Program {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
 		System.out.println("Danh sách sinh viên");
+
 		StudentBUS studentBUS = new StudentBUS();
 		List<Student> list = new ArrayList<Student>();
 		list = studentBUS.getAllStudent();
 		System.out.println(list.size());
-		for (Student student : list) {
-			System.out.print(student.getStudentId() + "/");
-			System.out.print(student.getFullName() + "/");
-			System.out.print(student.getAddress() + "/");
-			System.out.println(student.getAge());
-		}
+		studentBUS.showStudentList(list);
 
 	}
 

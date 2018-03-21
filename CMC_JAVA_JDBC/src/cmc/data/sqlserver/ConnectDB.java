@@ -22,7 +22,7 @@ public class ConnectDB {
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 */
-	public static Connection Connect() throws ClassNotFoundException, SQLException
+	public static Connection connect() throws ClassNotFoundException, SQLException
 	{
 		//load driver
 		Class.forName(Driver);
