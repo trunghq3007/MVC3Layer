@@ -28,11 +28,14 @@ public class StudentDAO {
 		Connection connect = ConnectDB.connect();
 		String sql = "Insert into Student Values(?,?,?,?)";
 		PreparedStatement prepare = connect.prepareStatement(sql);
+
 		connect.setAutoCommit(false);
+
 		prepare.setInt(1, student.getStudentId());
 		prepare.setString(2, student.getFullName());
 		prepare.setString(3, student.getAddress());
 		prepare.setInt(4, student.getAge());
+
 		connect.setAutoCommit(true);
 		try {
 			prepare.executeUpdate();
@@ -83,6 +86,65 @@ public class StudentDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	/**
+	 * @description:delete student in csdl
+	 * @author: Admin CMC Corporation
+	 * @create_date: Mar 21, 2018
+	 * @modifier: Admin
+	 * @modifined_date: Mar 21, 2018
+	 * @exception:
+	 * @param student
+	 * @return
+	 */
+	public boolean deleteStudent(Student student) {
+		Connection connect;
+		int check = 0;
+		try {
+			connect = ConnectDB.connect();
+			Statement statement = connect.createStatement();
+			check = statement.executeUpdate("delete from Student where studentId = " + student.getStudentId());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		if (check >= 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateStudent(Student student) {
+		Connection connect;
+		Statement statement;
+		int check = 0;
+		try {
+			connect = ConnectDB.connect();
+			statement = connect.createStatement();
+			String sql = "update Student set  fullName = ?,address =?, age=? where studentId = ?";
+			PreparedStatement prepare = connect.prepareStatement(sql);
+			prepare.setString(1, student.getFullName());
+			prepare.setString(2, student.getAddress());
+			prepare.setInt(3, student.getAge());
+			prepare.setInt(4, student.getStudentId());
+			check = prepare.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (check > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

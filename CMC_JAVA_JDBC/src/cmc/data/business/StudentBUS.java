@@ -64,6 +64,8 @@ public class StudentBUS {
 	 * @param list
 	 */
 	public void showStudentList(List<Student> list) {
+
+		System.out.println("Danh sách sinh viên");
 		// hiển thị các student trong list
 		for (Student student : list) {
 			System.out.print(student.getStudentId() + "/");
@@ -71,5 +73,35 @@ public class StudentBUS {
 			System.out.print(student.getAddress() + "/");
 			System.out.println(student.getAge());
 		}
+	}
+
+	/**
+	 * @description:
+	 * @author: Admin CMC Corporation
+	 * @create_date: Mar 21, 2018
+	 * @modifier: Admin
+	 * @modifined_date: Mar 21, 2018
+	 * @exception:
+	 * @param student
+	 * @return
+	 */
+	public boolean deleteStudent(Student student) {
+		StudentDAO studentDAO = new StudentDAO();
+		return studentDAO.deleteStudent(student);
+	}
+
+	/**
+	 * @description:
+	 * @author: Admin CMC Corporation
+	 * @create_date: Mar 21, 2018
+	 * @modifier: Admin
+	 * @modifined_date: Mar 21, 2018
+	 * @exception:
+	 * @param student
+	 * @return
+	 */
+	public boolean updateStudent(Student student) {
+		StudentDAO studentDAO = new StudentDAO();
+		return studentDAO.updateStudent(student);
 	}
 }

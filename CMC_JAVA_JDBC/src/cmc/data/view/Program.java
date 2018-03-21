@@ -16,15 +16,30 @@ import cmc.data.model.Student;
 public class Program {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
-		System.out.println("Danh sách sinh viên");
-
 		StudentBUS studentBUS = new StudentBUS();
 		List<Student> list = new ArrayList<Student>();
 		list = studentBUS.getAllStudent();
-		System.out.println(list.size());
-		studentBUS.showStudentList(list);
 
+		/*Student student = new Student();
+		student.setStudentId(100);
+		student.setFullName("abc");
+		student.setAge(20);
+		student.setAddress("add");*/
+		// them moi student
+		//studentBUS.insert(student);
+		/*list = studentBUS.getAllStudent();
+		studentBUS.showStudentList(list);*/
+		// studentBUS.deleteStudent(list.get(0));
+
+		// list = studentBUS.getAllStudent();
+		// studentBUS.showStudentList(list);
+		Student student2 = list.get(0);
+		student2.setAddress("sssssssssssssssssssssss");
+		studentBUS.updateStudent(student2);
+		
+		
+		list = studentBUS.getAllStudent();
+		//studentBUS.showStudentList(list);
 	}
 
 }
