@@ -8,7 +8,7 @@ import cmc.data.dao.StudentDAO;
 import cmc.data.model.Student;
 
 /**
- * @description:
+ * @description: business of student table
  * @create_date: Nov 27, 2017
  * @author: Ha Quang Trung CMC RDC-Traniner
  * @modify_date: Nov 27, 2017
@@ -17,8 +17,17 @@ import cmc.data.model.Student;
  */
 public class StudentBUS {
 
+	/**
+	 * @description: get all Student in Student table
+	 * @author: Admin CMC Corporation
+	 * @create_date: Mar 23, 2018
+	 * @modifier: Admin
+	 * @modifined_date: Mar 23, 2018
+	 * @exception:
+	 * @return: List<Student>
+	 */
 	public List<Student> getAllStudent() {
-		List<Student> list = new ArrayList<Student>();
+		List<Student> list = new ArrayList<>();
 		StudentDAO studentDAO = new StudentDAO();
 		try {
 			list = studentDAO.getList("Select * from Student ");
@@ -30,7 +39,7 @@ public class StudentBUS {
 	}
 
 	/**
-	 * @description:
+	 * @description: insert new student into student table
 	 * @create_date: Nov 27, 2017
 	 * @author: Ha Quang Trung CMC RDC-Traniner
 	 * @modify_date: Nov 27, 2017
@@ -55,7 +64,7 @@ public class StudentBUS {
 	}
 
 	/**
-	 * @description:
+	 * @description: show list student on screen
 	 * @author: Admin CMC Corporation
 	 * @create_date: Mar 21, 2018
 	 * @modifier: Admin
@@ -72,11 +81,12 @@ public class StudentBUS {
 			System.out.print(student.getFullName() + "/");
 			System.out.print(student.getAddress() + "/");
 			System.out.println(student.getAge());
+			System.out.println();
 		}
 	}
 
 	/**
-	 * @description:
+	 * @description: delete student in student table
 	 * @author: Admin CMC Corporation
 	 * @create_date: Mar 21, 2018
 	 * @modifier: Admin
@@ -91,7 +101,7 @@ public class StudentBUS {
 	}
 
 	/**
-	 * @description:
+	 * @description: update student in student table
 	 * @author: Admin CMC Corporation
 	 * @create_date: Mar 21, 2018
 	 * @modifier: Admin

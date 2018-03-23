@@ -27,22 +27,26 @@ public class StudentDAO {
 	public boolean insert(Student student) throws ClassNotFoundException, SQLException {
 		Connection connect = ConnectDB.connect();
 		String sql = "Insert into Student Values(?,?,?,?)";
-		PreparedStatement prepare = connect.prepareStatement(sql);
+		PreparedStatement prepare = null;
 
-		connect.setAutoCommit(false);
-
-		prepare.setInt(1, student.getStudentId());
-		prepare.setString(2, student.getFullName());
-		prepare.setString(3, student.getAddress());
-		prepare.setInt(4, student.getAge());
-
-		connect.setAutoCommit(true);
 		try {
+			prepare = connect.prepareStatement(sql);
+			connect.setAutoCommit(false);
+
+			prepare.setInt(1, student.getStudentId());
+			prepare.setString(2, student.getFullName());
+			prepare.setString(3, student.getAddress());
+			prepare.setInt(4, student.getAge());
+
+			connect.setAutoCommit(true);
 			prepare.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		} finally {
+			if (prepare != null) {
+				prepare.close();
+			}
 			connect.close();
 		}
 		return true;
@@ -60,15 +64,17 @@ public class StudentDAO {
 	 * @exception:
 	 */
 	public List<Student> getList(String sql) throws SQLException {
-		Connection connect;
-		// ConnectDB connectDB = new ConnectDB();
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet rs = null;
+		List<Student> list = null;
 		try {
 			connect = ConnectDB.connect();
-			List<Student> list = new ArrayList<Student>();
+			list = new ArrayList<>();
 			// Statement creation
-			Statement statement = connect.createStatement();
+			statement = connect.createStatement();
 			// for retrieve data
-			ResultSet rs = statement.executeQuery(sql);
+			rs = statement.executeQuery(sql);
 			while (rs.next()) {
 				Student student = new Student();
 				student.setStudentId(rs.getInt("studentId"));
@@ -82,9 +88,17 @@ public class StudentDAO {
 			connect.close();
 			return list;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+			return list;
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+			if (connect != null) {
+				connect.close();
+			}
 		}
 	}
 
@@ -106,11 +120,9 @@ public class StudentDAO {
 			Statement statement = connect.createStatement();
 			check = statement.executeUpdate("delete from Student where studentId = " + student.getStudentId());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
@@ -127,7 +139,7 @@ public class StudentDAO {
 		try {
 			connect = ConnectDB.connect();
 			statement = connect.createStatement();
-			String sql = "update Student set  fullName = ?,address =?, age=? where studentId = ?";
+			String sql = "update Student set  fullName = ?,address =?, age= ? where studentId = ?";
 			PreparedStatement prepare = connect.prepareStatement(sql);
 			prepare.setString(1, student.getFullName());
 			prepare.setString(2, student.getAddress());
@@ -135,10 +147,8 @@ public class StudentDAO {
 			prepare.setInt(4, student.getStudentId());
 			check = prepare.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (check > 0) {

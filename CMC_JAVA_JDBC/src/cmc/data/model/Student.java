@@ -5,7 +5,7 @@ public class Student {
 	String fullName;
 	String address;
 	int age;
-	
+
 	public Student(int studentId, String fullName, String address, int age) {
 		super();
 		this.studentId = studentId;
@@ -15,7 +15,6 @@ public class Student {
 	}
 
 	public Student() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getStudentId() {
@@ -49,5 +48,5 @@ public class Student {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
 }
