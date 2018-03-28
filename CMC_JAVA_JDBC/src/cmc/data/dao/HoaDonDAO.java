@@ -134,7 +134,7 @@ public class HoaDonDAO implements BaseDaoInterface<HoaDon> {
 		}
 		return false;
 	}
-
+//hung
 	@Override
 	public boolean update(HoaDon obj) {
 		Connection connect;
