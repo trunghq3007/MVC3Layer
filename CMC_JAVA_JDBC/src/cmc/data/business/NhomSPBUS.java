@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmc.data.dao.NhomSPDAO;
-import cmc.data.dao.StudentDAO;
 import cmc.data.model.NhomSP;
-import cmc.data.model.Student;
 
-public class NhomSPBUS implements BaseBusinessInterface<NhomSP>{
+public class NhomSPBUS implements BaseBusinessInterface<NhomSP> {
 
 	@Override
 	public boolean insert(NhomSP nhomSP) {
@@ -19,7 +17,7 @@ public class NhomSPBUS implements BaseBusinessInterface<NhomSP>{
 	public List<NhomSP> getList(String sql) {
 		List<NhomSP> list = new ArrayList<>();
 		NhomSPDAO nhomSPDAO = new NhomSPDAO();
-		list = nhomSPDAO.getList("Select * from NhomSP ");
+		list = nhomSPDAO.getList(sql);
 		return list;
 	}
 
@@ -64,6 +62,5 @@ public class NhomSPBUS implements BaseBusinessInterface<NhomSP>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

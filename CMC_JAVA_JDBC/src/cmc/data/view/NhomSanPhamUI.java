@@ -24,6 +24,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import cmc.data.SqlQuerry;
+import cmc.data.business.NhomSPBUS;
+import cmc.data.model.NhomSP;
+
 import javax.swing.ListSelectionModel;
 
 /**
@@ -70,9 +75,9 @@ public class NhomSanPhamUI extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Quản lí Nhóm sản phẩm");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(161, 10, 357, 58);
+		lblNewLabel.setBounds(159, 10, 357, 58);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMNsp = new JLabel("Mã NSP");
@@ -99,10 +104,16 @@ public class NhomSanPhamUI extends JFrame {
 		columns.add("Mã Nhóm sản phẩm");
 		columns.add("Tên Nhóm sản phẩm");
 
-		values.add(new String[] { "1", "Đồ gia dụng" });
-		values.add(new String[] { "2", "Đồ gia dụng" });
-		values.add(new String[] { "3", "Đồ gia dụng" });
+		/*
+		 * values.add(new String[] { "1", "Đồ gia dụng" }); values.add(new String[] {
+		 * "2", "Đồ gia dụng" }); values.add(new String[] { "3", "Đồ gia dụng" });
+		 */
 
+		NhomSPBUS nhomSPBUS = new NhomSPBUS();
+		List<NhomSP> nhomSPs = nhomSPBUS.getList(SqlQuerry.SELECT_ALL_NHOM_SP);
+		for (NhomSP nhomSP : nhomSPs) {
+			values.add(new String[] { String.valueOf(nhomSP.getMaNSP()), nhomSP.getTenNSP() });
+		}
 		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
 		table = new JTable(tableModel);
