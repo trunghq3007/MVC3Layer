@@ -37,6 +37,9 @@ public class ChiTietHD {
 		this.soLuong = soLuong;
 		this.tongTien = tongTien;
 	}
+	
+	public ChiTietHD() {
+	}
 
 	/**
 	 * @return the maHD

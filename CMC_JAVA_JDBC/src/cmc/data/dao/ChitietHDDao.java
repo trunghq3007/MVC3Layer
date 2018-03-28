@@ -2,7 +2,10 @@ package cmc.data.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import cmc.data.model.ChiTietHD;
@@ -54,9 +57,58 @@ public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
 	}
 
 	@Override
-	public List<ChiTietHD> getList(String sql) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChiTietHD> getList(String sql) {Connection connect = null;
+	Statement statement = null;
+	ResultSet rs = null;
+	List<ChiTietHD> list = null;
+	try {
+		connect = ConnectDB.connect();
+		list = new ArrayList<>();
+		// Statement creation
+		statement = connect.createStatement();
+		// for retrieve data
+		rs = statement.executeQuery(sql);
+		while (rs.next()) {
+			ChiTietHD ChiTietHD = new ChiTietHD();
+			ChiTietHD.setMaHD(rs.getInt("maHD"));
+			ChiTietHD.setMaSP(rs.getInt("maSP"));
+			ChiTietHD.setDonGia(rs.getFloat("donGia"));
+			ChiTietHD.setSoLuong(rs.getInt("soLuong"));
+			ChiTietHD.setTongTien(rs.getFloat("donGia"));
+			
+			list.add(ChiTietHD);
+		}
+		rs.close();
+		statement.close();
+		connect.close();
+		return list;
+	} catch (ClassNotFoundException e) {
+		return list;
+	} catch (SQLException e) {
+		return list;
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (connect != null) {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	}
 
 	@Override
