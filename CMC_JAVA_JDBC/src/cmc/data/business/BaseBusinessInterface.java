@@ -24,6 +24,7 @@ public interface BaseBusinessInterface<T> {
 	 * @return
 	 */
 	public boolean insert(T obj);
+	
 
 	/**
 	 * @description:
