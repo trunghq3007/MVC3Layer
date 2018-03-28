@@ -33,6 +33,10 @@ public class KhachHang {
 	 * @param diaChi
 	 * @param thanhPho
 	 */
+	public KhachHang()
+	{
+
+	}
 	public KhachHang(int maKH, String tenKH, String userName, String password, String tenCongTy, String diaChi,
 			String thanhPho) {
 		super();
