@@ -14,7 +14,7 @@ import java.sql.Date;
 public class HoaDon {
 	private int maHD;
 	private int maKH;
-	private String maNV;
+	private int maNV;
 	private float tongTien;
 	private Date ngayLHD;
 
@@ -31,13 +31,17 @@ public class HoaDon {
 	 * @param tongTien
 	 * @param ngayLHD
 	 */
-	public HoaDon(int maHD, int maKH, String maNV, float tongTien, Date ngayLHD) {
+	public HoaDon(int maHD, int maKH, int maNV, float tongTien, Date ngayLHD) {
 		super();
 		this.maHD = maHD;
 		this.maKH = maKH;
 		this.maNV = maNV;
 		this.tongTien = tongTien;
 		this.ngayLHD = ngayLHD;
+	}
+
+	public HoaDon() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -73,16 +77,16 @@ public class HoaDon {
 	/**
 	 * @return the maNV
 	 */
-	public String getMaNV() {
+	public int getMaNV() {
 		return maNV;
 	}
 
 	/**
-	 * @param maNV
+	 * @param i
 	 *            the maNV to set
 	 */
-	public void setMaNV(String maNV) {
-		this.maNV = maNV;
+	public void setMaNV(int i) {
+		this.maNV = i;
 	}
 
 	/**
