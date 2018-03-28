@@ -29,11 +29,7 @@ public class StudentBUS {
 	public List<Student> getAllStudent() {
 		List<Student> list = new ArrayList<>();
 		StudentDAO studentDAO = new StudentDAO();
-		try {
-			list = studentDAO.getList("Select * from Student ");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		list = studentDAO.getList("Select * from Student ");
 		return list;
 
 	}
@@ -51,16 +47,7 @@ public class StudentBUS {
 	 * @exception:
 	 */
 	public boolean insert(Student student) {
-		try {
-			return new StudentDAO().insert(student);
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return false;
+		return new StudentDAO().insert(student);
 	}
 
 	/**

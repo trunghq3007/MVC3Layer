@@ -29,6 +29,10 @@ import java.awt.Color;
  * @date: Mar 23, 2018
  */
 public class LoginUI extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static StudentBUS studentBUS;
 	private JPanel contentPane;
 	private JTextField txtUsername;
@@ -58,6 +62,7 @@ public class LoginUI extends JFrame {
 	}
 
 	/**
+	 * 
 	 * Create the frame.
 	 */
 	public LoginUI() {

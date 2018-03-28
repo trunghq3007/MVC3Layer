@@ -29,6 +29,18 @@ public class NhomSP {
 		this.tenNSP = tenNSP;
 	}
 
+	 /**
+	 * @description:  
+	 * @author: Admin CMC Corporation
+	 * @create_date: Mar 28, 2018
+	 * @modifier: Admin
+	 * @modifined_date: Mar 28, 2018
+	 * @exception: 
+	 */
+	public NhomSP() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the maNSP
 	 */

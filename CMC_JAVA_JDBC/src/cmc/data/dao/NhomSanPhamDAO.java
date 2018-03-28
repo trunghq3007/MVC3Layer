@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package cmc.data.dao;
 
 import java.sql.Connection;
@@ -8,25 +11,28 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import cmc.data.model.Student;
+import cmc.data.model.NhomSP;
 import cmc.data.sqlserver.ConnectDB;
 
-public class StudentDAO {
-	/**
-	 * @description: handle insert to db
-	 * @create_date: Nov 27, 2017
-	 * @author: Ha Quang Trung CMC RDC-Traniner
-	 * @modify_date: Nov 27, 2017
-	 * @modifier: Ha Quang Trung
-	 * @param student
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @exception:
+/**
+ * @description:
+ * @author: Admin
+ * @time: 3:35:37 PM
+ * @date: Mar 28, 2018
+ */
+public class NhomSanPhamDAO implements BaseDaoInterface<NhomSP> {
+
+	NhomSP currentObj;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#insert(java.lang.Object)
 	 */
-	public boolean insert(Student student) {
+	@Override
+	public boolean insert(NhomSP obj) {
 		Connection connect = null;
-		String sql = "Insert into Student Values(?,?,?,?)";
+		String sql = "Insert into NhomSP Values(?,?)";
 		PreparedStatement prepare = null;
 
 		try {
@@ -34,10 +40,8 @@ public class StudentDAO {
 			prepare = connect.prepareStatement(sql);
 			connect.setAutoCommit(false);
 
-			prepare.setInt(1, student.getStudentId());
-			prepare.setString(2, student.getFullName());
-			prepare.setString(3, student.getAddress());
-			prepare.setInt(4, student.getAge());
+			prepare.setInt(1, obj.getMaNSP());
+			prepare.setString(2, obj.getTenNSP());
 
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();
@@ -49,7 +53,6 @@ public class StudentDAO {
 				try {
 					prepare.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -57,7 +60,6 @@ public class StudentDAO {
 				try {
 					connect.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -65,22 +67,17 @@ public class StudentDAO {
 		return true;
 	}
 
-	/**
-	 * @description: get all student from tbl student
-	 * @create_date: Nov 27, 2017
-	 * @author: Ha Quang Trung CMC RDC-Traniner
-	 * @modify_date: Nov 27, 2017
-	 * @modifier: Ha Quang Trung
-	 * @param sql
-	 * @return
-	 * @throws SQLException
-	 * @exception:
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getList(java.lang.String)
 	 */
-	public List<Student> getList(String sql) {
+	@Override
+	public List<NhomSP> getList(String sql) {
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet rs = null;
-		List<Student> list = null;
+		List<NhomSP> list = null;
 		try {
 			connect = ConnectDB.connect();
 			list = new ArrayList<>();
@@ -89,12 +86,10 @@ public class StudentDAO {
 			// for retrieve data
 			rs = statement.executeQuery(sql);
 			while (rs.next()) {
-				Student student = new Student();
-				student.setStudentId(rs.getInt("studentId"));
-				student.setFullName(rs.getString("fullName"));
-				student.setAddress(rs.getString("address"));
-				student.setAge(rs.getInt("age"));
-				list.add(student);
+				NhomSP nhomSP = new NhomSP();
+				nhomSP.setMaNSP(rs.getInt("maNSP"));
+				nhomSP.setTenNSP(rs.getString("tenNSP"));
+				list.add(nhomSP);
 			}
 			rs.close();
 			statement.close();
@@ -109,7 +104,6 @@ public class StudentDAO {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -117,7 +111,6 @@ public class StudentDAO {
 				try {
 					statement.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -125,30 +118,25 @@ public class StudentDAO {
 				try {
 					connect.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
 	}
 
-	/**
-	 * @description:delete student in csdl
-	 * @author: Admin CMC Corporation
-	 * @create_date: Mar 21, 2018
-	 * @modifier: Admin
-	 * @modifined_date: Mar 21, 2018
-	 * @exception:
-	 * @param student
-	 * @return
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#delete(java.lang.Object)
 	 */
-	public boolean deleteStudent(Student student) {
+	@Override
+	public boolean delete(NhomSP obj) {
 		Connection connect;
 		int check = 0;
 		try {
 			connect = ConnectDB.connect();
 			Statement statement = connect.createStatement();
-			check = statement.executeUpdate("delete from Student where studentId = " + student.getStudentId());
+			check = statement.executeUpdate("delete from NhomSP where maNSP = " + obj.getMaNSP());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 
@@ -162,19 +150,23 @@ public class StudentDAO {
 		return false;
 	}
 
-	public boolean updateStudent(Student student) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#update(java.lang.Object)
+	 */
+	@Override
+	public boolean update(NhomSP obj) {
 		Connection connect;
 		Statement statement;
 		int check = 0;
 		try {
 			connect = ConnectDB.connect();
 			statement = connect.createStatement();
-			String sql = "update Student set  fullName = ?,address =?, age= ? where studentId = ?";
+			String sql = "update NhomSP set  tenNSP = ? where maNSP = ?";
 			PreparedStatement prepare = connect.prepareStatement(sql);
-			prepare.setString(1, student.getFullName());
-			prepare.setString(2, student.getAddress());
-			prepare.setInt(3, student.getAge());
-			prepare.setInt(4, student.getStudentId());
+			prepare.setString(1, obj.getTenNSP());
+			prepare.setInt(2, obj.getMaNSP());
 			check = prepare.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -185,6 +177,75 @@ public class StudentDAO {
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getFirst()
+	 */
+	@Override
+	public NhomSP getFirst() {
+		List<NhomSP> list = getList("select * from NhomSP");
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getLast()
+	 */
+	@Override
+	public NhomSP getLast() {
+		List<NhomSP> list = getList("select * from NhomSP");
+		int size = list.size();
+		if (size > 0) {
+			return list.get(size - 1);
+		}
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getCurrent()
+	 */
+	@Override
+	public NhomSP getCurrent() {
+		return currentObj;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#setCurrent(java.lang.Object)
+	 */
+	@Override
+	public void setCurrent(NhomSP obj) {
+		this.currentObj = obj;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getNext()
+	 */
+	@Override
+	public NhomSP getNext() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cmc.data.dao.BaseDaoInterface#getPrevious()
+	 */
+	@Override
+	public NhomSP getPrevious() {
+		return null;
 	}
 
 }
