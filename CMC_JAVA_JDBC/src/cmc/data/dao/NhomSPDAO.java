@@ -27,7 +27,6 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 
 			prepare.setInt(1, obj.getMaNSP());
 			prepare.setString(2, obj.getTenNSP());
-			
 
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();
@@ -70,7 +69,7 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 				NhomSP nhomSP = new NhomSP();
 				nhomSP.setMaNSP(rs.getInt("maNSP"));
 				nhomSP.setTenNSP(rs.getString("tenNSP"));
-			
+				list.add(nhomSP);
 			}
 			rs.close();
 			statement.close();
@@ -141,7 +140,7 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 			PreparedStatement prepare = connect.prepareStatement(sql);
 			prepare.setInt(1, nhomSP.getMaNSP());
 			prepare.setString(2, nhomSP.getTenNSP());
-			
+
 			check = prepare.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -175,7 +174,7 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 	@Override
 	public void setCurrent(NhomSP obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -189,6 +188,5 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }
