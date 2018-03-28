@@ -49,6 +49,13 @@ public class SanPham {
 	}
 
 	/**
+	 * 
+	 */
+	public SanPham() {
+	
+	}
+
+	/**
 	 * @param maSP
 	 *            the maSP to set
 	 */

@@ -24,6 +24,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import cmc.data.business.StudentBUS;
+import cmc.data.model.Student;
+
 /**
  * @description: giao diện quản lí student
  * @author: Admin
@@ -159,6 +162,7 @@ public class ManageStudentUI extends JFrame {
 	 * @exception:
 	 * @return
 	 */
+	static StudentBUS studentBUS;
 	private JTable getStudentTable() {
 		table = new JTable();
 		table.setBounds(50, 217, 783, 300);
@@ -169,11 +173,18 @@ public class ManageStudentUI extends JFrame {
 		columns.add("fullName");
 		columns.add("address");
 		columns.add("age");
-		values.add(new String[] { "123", "âbc", "xyz", "28" });
-		values.add(new String[] { "123", "âbc", "xyz", "28" });
-		values.add(new String[] { "123", "âbc", "xyz", "28" });
-		values.add(new String[] { "123", "âbc", "xyz", "28" });
-		values.add(new String[] { "123", "âbc", "xyz", "28" });
+		studentBUS = new StudentBUS();
+		List<Student> list = studentBUS.getAllStudent();
+		for (Student student : list) {
+			String[] setValues=new String[4];
+			setValues[0]=Integer.toString(student.getStudentId());
+			setValues[1]=student.getFullName();
+			setValues[2]=student.getAddress();
+			setValues[3]=Integer.toString(student.getAge());
+			values.add(setValues);
+			
+		}
+
 
 		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
