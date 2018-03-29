@@ -113,13 +113,49 @@ public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
 
 	@Override
 	public boolean delete(ChiTietHD obj) {
-		// TODO Auto-generated method stub
+		Connection connect;
+		int check = 0;
+		try {
+			connect = ConnectDB.connect();
+			Statement statement = connect.createStatement();
+			check = statement.executeUpdate("delete from ChitietHD where maHD = " + obj.getMaHD());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		if (check >= 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean update(ChiTietHD obj) {
-		// TODO Auto-generated method stub
+		Connection connect;
+		Statement statement;
+		int check = 0;
+		try {
+			connect = ConnectDB.connect();
+			statement = connect.createStatement();
+			String sql = "update chitietHD set maSP = ? , dongia =? , Soluong =?, tongtien=? where maHD = ? ";
+			PreparedStatement prepare = connect.prepareStatement(sql);
+			prepare.setInt(1, obj.getMaSP());
+			prepare.setFloat(2, obj.getDonGia());
+			prepare.setInt(3, obj.getSoLuong());
+			prepare.setFloat(4, obj.getTongTien());
+			prepare.setInt(5, obj.getMaHD());
+			check = prepare.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (check > 0) {
+			return true;
+		}
 		return false;
 	}
 
