@@ -179,8 +179,8 @@ public class ChitiethoadonUI extends JFrame {
 		btnNewButton.setBounds(26, 194, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("Insert");
-		button.addActionListener(new ActionListener() {
+		JButton buttonInsert = new JButton("Insert");
+		buttonInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			try {
 				ChitietHDBUS chitietHDBUS = new ChitietHDBUS();
@@ -196,12 +196,29 @@ public class ChitiethoadonUI extends JFrame {
 			}
 		}
 		});
-		button.setBounds(122, 194, 85, 21);
-		contentPane.add(button);
+		buttonInsert.setBounds(122, 194, 85, 21);
+		contentPane.add(buttonInsert);
 
-		JButton button_1 = new JButton("Update");
-		button_1.setBounds(217, 194, 85, 21);
-		contentPane.add(button_1);
+		JButton buttonUpdate = new JButton("Update");
+		buttonUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			try {
+				ChitietHDBUS chitietHDBUS = new ChitietHDBUS();
+				ChiTietHD obj = new ChiTietHD();
+				obj.setMaSP(Integer.parseInt(txtMaSP.getText()));
+				obj.setDonGia(Float.parseFloat(txtdongia.getText()));
+				obj.setSoLuong(Integer.parseInt(txtsoLuong.getText()));
+				obj.setTongTien(Float.parseFloat(txttongTien.getText()));
+				chitietHDBUS.update(obj);
+				JOptionPane.showMessageDialog(null, "Update successfully!");
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Update fail!");
+			}
+		}
+		});
+		
+		buttonUpdate.setBounds(217, 194, 85, 21);
+		contentPane.add(buttonUpdate);
 
 		JButton button_2 = new JButton("Delete");
 		button_2.setBounds(312, 194, 85, 21);
