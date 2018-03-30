@@ -11,4 +11,5 @@ package cmc.data;
  */
 public class SqlQuerry {
 	public static final String SELECT_ALL_NHOM_SP = "select * from NhomSP";
+	public static final String SELECT_ALL_SAN_PHAM = "select * from SanPham";
 }
