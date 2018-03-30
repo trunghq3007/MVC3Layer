@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cmc.data.view;
 
 import java.awt.EventQueue;
@@ -29,14 +26,7 @@ import cmc.data.SqlQuerry;
 import cmc.data.business.NhomSPBUS;
 import cmc.data.model.NhomSP;
 
-/**
- * @description:
- * @author: Admin
- * @time: 10:18:13 AM
- * @date: Mar 28, 2018
- */
-public class NhomSanPhamUI extends JFrame {
-
+public class NhomSPUI extends JFrame{
 	private JPanel contentPane;
 	private JTextField txtMaNSP;
 	private JTextField txtTenNSP;
@@ -51,7 +41,7 @@ public class NhomSanPhamUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhomSanPhamUI frame = new NhomSanPhamUI();
+					NhomSPUI frame = new NhomSPUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -64,7 +54,7 @@ public class NhomSanPhamUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NhomSanPhamUI() {
+	public NhomSPUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 560);
 		contentPane = new JPanel();
@@ -79,21 +69,21 @@ public class NhomSanPhamUI extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMNsp = new JLabel("Mã NSP");
-		lblMNsp.setBounds(26, 98, 45, 13);
+		lblMNsp.setBounds(26, 83, 45, 13);
 		contentPane.add(lblMNsp);
 
 		JLabel lblTnNsp = new JLabel("Tên NSP");
-		lblTnNsp.setBounds(26, 132, 45, 13);
+		lblTnNsp.setBounds(26, 131, 45, 13);
 		contentPane.add(lblTnNsp);
 
 		txtMaNSP = new JTextField();
-		txtMaNSP.setBounds(81, 95, 234, 19);
+		txtMaNSP.setBounds(81, 79, 289, 19);
 		contentPane.add(txtMaNSP);
 		txtMaNSP.setColumns(10);
 
 		txtTenNSP = new JTextField();
 		txtTenNSP.setColumns(10);
-		txtTenNSP.setBounds(81, 127, 234, 19);
+		txtTenNSP.setBounds(81, 127, 289, 19);
 		contentPane.add(txtTenNSP);
 
 		List<String> columns = new ArrayList<String>();
@@ -102,10 +92,6 @@ public class NhomSanPhamUI extends JFrame {
 		columns.add("Mã Nhóm sản phẩm");
 		columns.add("Tên Nhóm sản phẩm");
 
-		/*
-		 * values.add(new String[] { "1", "Đồ gia dụng" }); values.add(new String[] {
-		 * "2", "Đồ gia dụng" }); values.add(new String[] { "3", "Đồ gia dụng" });
-		 */
 
 		NhomSPBUS nhomSPBUS = new NhomSPBUS();
 		List<NhomSP> nhomSPs = nhomSPBUS.getList(SqlQuerry.SELECT_ALL_NHOM_SP);
@@ -123,9 +109,7 @@ public class NhomSanPhamUI extends JFrame {
 		contentPane.add(scrollPane);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
-				// do some actions here, for example
-				// print first column value from selected row
-				// System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+				
 				JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(), 0).toString());
 			}
 		});
@@ -146,25 +130,19 @@ public class NhomSanPhamUI extends JFrame {
 		btnNewButton.setBounds(26, 174, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("New button");
-		button.setBounds(122, 174, 85, 21);
-		contentPane.add(button);
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.setBounds(122, 174, 85, 21);
+		contentPane.add(btnInsert);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(217, 174, 85, 21);
-		contentPane.add(button_1);
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(217, 174, 85, 21);
+		contentPane.add(btnUpdate);
 
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(312, 174, 85, 21);
-		contentPane.add(button_2);
-
-		JButton button_3 = new JButton("New button");
-		button_3.setBounds(407, 174, 85, 21);
-		contentPane.add(button_3);
-
-		JButton button_4 = new JButton("New button");
-		button_4.setBounds(502, 174, 85, 21);
-		contentPane.add(button_4);
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(312, 174, 85, 21);
+		contentPane.add(btnDelete);
 
 	}
+	
+
 }

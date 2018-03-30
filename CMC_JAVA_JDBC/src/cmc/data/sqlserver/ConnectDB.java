@@ -14,9 +14,11 @@ public class ConnectDB {
 	static String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	static String userName = "";
 	static String passWord = "";
-	static String URL = "jdbc:sqlserver://localhost:1433"
+	/*static String URL = "jdbc:sqlserver://localhost:1433"
 			+ ";instance=SQLEXPRESS;databaseName=CSD-RDC;integratedSecurity=true;";
-
+*/
+	static String URL = "jdbc:sqlserver://localhost:1433"
+			+ ";instance=SQLEXPRESS;databaseName=CSD-RDC ;integratedSecurity=true;";
 	/**
 	 * @description:
 	 * @author: Admin CMC Corporation
