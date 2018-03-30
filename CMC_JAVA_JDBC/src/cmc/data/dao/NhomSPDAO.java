@@ -17,7 +17,7 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 	@Override
 	public boolean insert(NhomSP obj) {
 		Connection connect = null;
-		String sql = "Insert into NhanVien Values(?,?)";
+		String sql = "Insert into NhomSP Values(?,?)";
 		PreparedStatement prepare = null;
 
 		try {
