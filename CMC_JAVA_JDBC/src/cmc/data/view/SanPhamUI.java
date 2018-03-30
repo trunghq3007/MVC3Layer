@@ -180,7 +180,7 @@ public class SanPhamUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Updated successfully!!!");
 					refreshTable();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Lỗi cmnr!!!");
+					JOptionPane.showMessageDialog(null, "Update failed!!!");
 				}
 			}
 		});
@@ -204,7 +204,7 @@ public class SanPhamUI extends JFrame {
 					refreshTable();
 					clearFieldSanPham();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Lỗi cmnr!!!");
+					JOptionPane.showMessageDialog(null, "Delete failed!!!");
 				}
 				
 			}
@@ -237,7 +237,7 @@ public class SanPhamUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Inserted successfully!!!");
 					refreshTable();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Lỗi cmnr!!!");
+					JOptionPane.showMessageDialog(null, "Insert failed!!!");
 				}
 			}
 		});
