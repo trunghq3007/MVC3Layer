@@ -71,60 +71,60 @@ public class ChitiethoadonUI extends JFrame {
 		JLabel lblNewLabel = new JLabel("Quản lí chi tiết hóa đơn");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(159, 10, 357, 58);
+		lblNewLabel.setBounds(160, 0, 357, 38);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblMHD = new JLabel("Mã HĐ");
-		lblMHD.setBounds(26, 98, 45, 13);
+		lblMHD.setBounds(26, 51, 45, 13);
 		contentPane.add(lblMHD);
 
-		JLabel lblTSP = new JLabel("Tên SP");
-		lblTSP.setBounds(26, 132, 45, 13);
+		JLabel lblTSP = new JLabel("Mã SP");
+		lblTSP.setBounds(26, 95, 45, 13);
 		contentPane.add(lblTSP);
 		
 		JLabel lbLDG = new JLabel("Đơn giá");
-		lbLDG.setBounds(26, 98, 45, 13);
+		lbLDG.setBounds(304, 51, 64, 13);
 		contentPane.add(lbLDG);
 
 		JLabel lbLSL = new JLabel("Số Lượng");
-		lbLSL.setBounds(26, 132, 45, 13);
+		lbLSL.setBounds(304, 95, 64, 13);
 		contentPane.add(lbLSL);
 		
 		JLabel lbLTT = new JLabel("Tổng tiền");
-		lbLTT.setBounds(26, 132, 45, 13);
+		lbLTT.setBounds(160, 150, 71, 13);
 		contentPane.add(lbLTT);
 		
 
 		txtMaHD = new JTextField();
-		txtMaHD.setBounds(81, 95, 234, 19);
+		txtMaHD.setBounds(81, 51, 213, 19);
 		contentPane.add(txtMaHD);
 		txtMaHD.setColumns(10);
 
 		txtMaSP = new JTextField();
 		txtMaSP.setColumns(10);
-		txtMaSP.setBounds(81, 127, 234, 19);
+		txtMaSP.setBounds(81, 91, 213, 19);
 		contentPane.add(txtMaSP);
 		
 		txtdongia = new JTextField();
 		txtdongia.setColumns(10);
-		txtdongia.setBounds(81, 127, 234, 19);
+		txtdongia.setBounds(378, 47, 223, 19);
 		contentPane.add(txtdongia);
 		
 		txtsoLuong = new JTextField();
 		txtsoLuong.setColumns(10);
-		txtsoLuong.setBounds(81, 127, 234, 19);
+		txtsoLuong.setBounds(378, 91, 223, 19);
 		contentPane.add(txtsoLuong);
 		
 		txttongTien = new JTextField();
 		txttongTien.setColumns(10);
-		txttongTien.setBounds(81, 127, 234, 19);
+		txttongTien.setBounds(258, 146, 234, 19);
 		contentPane.add(txttongTien);
 
 		List<String> columns = new ArrayList<String>();
 		List<String[]> values = new ArrayList<String[]>();
 
 		columns.add("Mã Hóa Đơn");
-		columns.add("Tên Sản Phẩm");
+		columns.add("Mã Sản Phẩm");
 		columns.add("Đơn Giá");
 		columns.add("Số Lượng");
 		columns.add("Tổng Tiền");
@@ -174,27 +174,35 @@ public class ChitiethoadonUI extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(26, 174, 85, 21);
+		btnNewButton.setBounds(26, 194, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("New button");
-		button.setBounds(122, 174, 85, 21);
+		JButton button = new JButton("Update");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(122, 194, 85, 21);
 		contentPane.add(button);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(217, 174, 85, 21);
+		JButton button_1 = new JButton("Delete");
+		button_1.setBounds(217, 194, 85, 21);
 		contentPane.add(button_1);
 
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(312, 174, 85, 21);
+		JButton button_2 = new JButton("Get First");
+		button_2.setBounds(312, 194, 85, 21);
 		contentPane.add(button_2);
 
-		JButton button_3 = new JButton("New button");
-		button_3.setBounds(407, 174, 85, 21);
+		JButton button_3 = new JButton("Get Last");
+		button_3.setBounds(407, 194, 85, 21);
 		contentPane.add(button_3);
 
-		JButton button_4 = new JButton("New button");
-		button_4.setBounds(502, 174, 85, 21);
+		JButton button_4 = new JButton("Get Current");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_4.setBounds(508, 194, 85, 21);
 		contentPane.add(button_4);
 
 	}

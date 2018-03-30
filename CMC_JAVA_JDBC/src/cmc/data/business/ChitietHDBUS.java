@@ -9,7 +9,7 @@ import cmc.data.model.ChiTietHD;
 import cmc.data.model.NhomSP;
 
 public class ChitietHDBUS implements BaseBusinessInterface<ChiTietHD> {
-
+//start
 	@Override
 	public boolean insert(ChiTietHD chiTietHD) {
 		return new ChitietHDDao().insert(chiTietHD);
