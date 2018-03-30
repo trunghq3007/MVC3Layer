@@ -52,7 +52,7 @@ public class SanPhamUI extends JFrame {
 	private JScrollPane scrollPane;
 	private JTextField txtMaNSP;
 	private JTextField txtDonGia;
-	private JTextField txtSoLuong;
+	private JTextField txtSoLuongHang;
 	private JTextField txtAnh;
 
 	/**
@@ -126,7 +126,7 @@ public class SanPhamUI extends JFrame {
 				txtTenSP.setText(model.getValueAt(row, 1).toString());
 				txtMaNSP.setText(model.getValueAt(row, 2).toString());
 				txtDonGia.setText(model.getValueAt(row, 3).toString());
-				txtSoLuong.setText(model.getValueAt(row, 4).toString());
+				txtSoLuongHang.setText(model.getValueAt(row, 4).toString());
 				txtAnh.setText((String) (model.getValueAt(row, 5)));
 
 			}
@@ -174,7 +174,7 @@ public class SanPhamUI extends JFrame {
 					obj.setTenSP(txtTenSP.getText());
 					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
-					obj.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
 					sanPhamBus.update(obj);
 					JOptionPane.showMessageDialog(null, "Updated successfully!!!");
@@ -197,7 +197,7 @@ public class SanPhamUI extends JFrame {
 					obj.setTenSP(txtTenSP.getText());
 					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
-					obj.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
 					sanPhamBus.delete(obj);
 					JOptionPane.showMessageDialog(null, "Deleted successfully!!!");
@@ -231,7 +231,7 @@ public class SanPhamUI extends JFrame {
 					obj.setTenSP(txtTenSP.getText());
 					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
-					obj.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
 					sanPhamBus.insert(obj);
 					JOptionPane.showMessageDialog(null, "Inserted successfully!!!");
@@ -265,15 +265,23 @@ public class SanPhamUI extends JFrame {
 		txtDonGia.setBounds(433, 71, 181, 19);
 		contentPane.add(txtDonGia);
 
-		txtSoLuong = new JTextField();
-		txtSoLuong.setColumns(10);
-		txtSoLuong.setBounds(433, 103, 181, 19);
-		contentPane.add(txtSoLuong);
+		txtSoLuongHang = new JTextField();
+		txtSoLuongHang.setColumns(10);
+		txtSoLuongHang.setBounds(433, 103, 181, 19);
+		contentPane.add(txtSoLuongHang);
 
 		txtAnh = new JTextField();
 		txtAnh.setColumns(10);
 		txtAnh.setBounds(433, 134, 181, 19);
 		contentPane.add(txtAnh);
+		
+		JList list = new JList();
+		list.setBounds(750, 296, -89, -101);
+		contentPane.add(list);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(630, 191, 139, 22);
+		contentPane.add(comboBox);
 
 	}
 
@@ -303,7 +311,7 @@ public class SanPhamUI extends JFrame {
 		txtTenSP.setText("");
 		txtMaNSP.setText("");
 		txtDonGia.setText("");
-		txtSoLuong.setText("");
+		txtSoLuongHang.setText("");
 		txtAnh.setText("");		
 	}
 
