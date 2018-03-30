@@ -10,6 +10,6 @@ package cmc.data;
  * @date: Mar 28, 2018
  */
 public class SqlQuerry {
-	public static final String SELECT_ALL_MaHD = "select * from ChiTietHD";
-	public static final String SELECT_ALL_SAN_PHAM = "select * from SanPham";
+	public static final String SELECT_ALL_NHOM_SP = "select * from NhomSP";
+	public static final String SELECT_ALL_KhachHang = "select * from KhachHang";
 }

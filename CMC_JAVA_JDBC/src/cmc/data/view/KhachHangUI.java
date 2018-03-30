@@ -43,11 +43,11 @@ public class KhachHangUI extends JFrame {
 	private JTable table;
 	private TableModel tableModel;
 	private JScrollPane scrollPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtusername;
+	private JTextField txtpassword;
+	private JTextField txttencongty;
+	private JTextField txtdiachi;
+	private JTextField txtthanhpho;
 
 	/**
 	 * Launch the application.
@@ -56,7 +56,7 @@ public class KhachHangUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhomSanPhamUI frame = new NhomSanPhamUI();
+					KhachHangUI frame = new KhachHangUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -104,22 +104,27 @@ public class KhachHangUI extends JFrame {
 		List<String> columns = new ArrayList<String>();
 		List<String[]> values = new ArrayList<String[]>();
 
-		columns.add("Mã Nhóm sản phẩm");
-		columns.add("Tên Nhóm sản phẩm");
-
+		columns.add("Mã KH");
+		columns.add("Tên KH");
+		columns.add("Tên username");
+		columns.add("Tên password");
+		columns.add("Tên Công Ty");
+		columns.add("Địa Chỉ");
+		columns.add("Thành Phố");
 		/*
 		 * values.add(new String[] { "1", "Đồ gia dụng" }); values.add(new String[] {
 		 * "2", "Đồ gia dụng" }); values.add(new String[] { "3", "Đồ gia dụng" });
 		 */
 
 		KhachHangBUS khachangBUS = new KhachHangBUS();
-		List<KhachHang> khachangs = khachangBUS.getList(SqlQuerry.SELECT_ALL_SAN_PHAM);
+		List<KhachHang> khachangs = khachangBUS.getList(SqlQuerry.SELECT_ALL_KhachHang);
 		for (KhachHang khachhang : khachangs) {
-			values.add(new String[] { String.valueOf(khachhang.getMaKH()), khachhang.getTenKH(), khachhang.getTenKH(),khachhang.getUserName(), khachhang.getPassword(), khachhang.getTenCongTy(), khachhang.getDiaChi(),khachhang.getThanhPho()});
+			values.add(new String[] { String.valueOf(khachhang.getMaKH()), khachhang.getTenKH(),khachhang.getUserName(), khachhang.getPassword(), khachhang.getTenCongTy(), khachhang.getDiaChi(),khachhang.getThanhPho()});
 		}
 		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
 		scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("");
 		scrollPane.setBounds(26, 464, 567, 260);
 		contentPane.add(scrollPane);
 		
@@ -143,78 +148,76 @@ public class KhachHangUI extends JFrame {
 					btnNewButton.setText("Save");
 				} else {
 					// save
-					String maNSP = txtmaKH.getText().trim();
-					String tenNSP = txttenKH.getText().trim();
+					String MaKH = txtmaKH.getText().trim();
+					String tenKH = txttenKH.getText().trim();
+					String username = txtusername.getText().trim();
+					String password = txtpassword.getText().trim();
+					String tencongty = txttencongty.getText().trim();
+					String diachi = txtdiachi.getText().trim();
+					String thanhpho = txtthanhpho.getText().trim();
+					
 					// and refresh data in table
 				}
 			}
 		});
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("New button");
-		button.setBounds(122, 346, 85, 21);
-		contentPane.add(button);
+		JButton buttonUpdate = new JButton("Update");
+		buttonUpdate.setBounds(122, 346, 85, 21);
+		contentPane.add(buttonUpdate);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(219, 346, 85, 21);
-		contentPane.add(button_1);
+		JButton buttonDelete = new JButton("Delete");
+		buttonDelete.setBounds(219, 346, 85, 21);
+		contentPane.add(buttonDelete);
 
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(313, 346, 85, 21);
-		contentPane.add(button_2);
-
-		JButton button_3 = new JButton("New button");
-		button_3.setBounds(410, 346, 85, 21);
-		contentPane.add(button_3);
-
-		JButton button_4 = new JButton("New button");
-		button_4.setBounds(507, 346, 85, 21);
-		contentPane.add(button_4);
+		JButton buttonInsert = new JButton("Insert");
+		buttonInsert.setBounds(313, 346, 85, 21);
+		contentPane.add(buttonInsert);
 		
 		JLabel lblusername = new JLabel("username");
 		lblusername.setBounds(26, 163, 128, 16);
 		contentPane.add(lblusername);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 160, 234, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtusername = new JTextField();
+		txtusername.setBounds(200, 160, 234, 22);
+		contentPane.add(txtusername);
+		txtusername.setColumns(10);
 		
 		JLabel lblpassword = new JLabel("Password");
 		lblpassword.setBounds(26, 196, 128, 13);
 		contentPane.add(lblpassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(200, 195, 234, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtpassword = new JTextField();
+		txtpassword.setBounds(200, 195, 234, 22);
+		contentPane.add(txtpassword);
+		txtpassword.setColumns(10);
 		
 		JLabel lbltenCongTy = new JLabel("Tên Công Ty");
 		lbltenCongTy.setBounds(26, 230, 128, 16);
 		contentPane.add(lbltenCongTy);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(200, 230, 234, 22);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txttencongty = new JTextField();
+		txttencongty.setBounds(200, 230, 234, 22);
+		contentPane.add(txttencongty);
+		txttencongty.setColumns(10);
 		
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setBounds(26, 264, 128, 16);
 		contentPane.add(lblDiaChi);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(200, 265, 234, 22);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtdiachi = new JTextField();
+		txtdiachi.setBounds(200, 265, 234, 22);
+		contentPane.add(txtdiachi);
+		txtdiachi.setColumns(10);
 		
 		JLabel lblThanhPho = new JLabel("Thành Phố");
 		lblThanhPho.setBounds(26, 304, 128, 16);
 		contentPane.add(lblThanhPho);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(200, 301, 234, 22);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtthanhpho = new JTextField();
+		txtthanhpho.setBounds(200, 301, 234, 22);
+		contentPane.add(txtthanhpho);
+		txtthanhpho.setColumns(10);
 
 	}
 }
