@@ -17,7 +17,7 @@ public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
 	@Override
 	public boolean insert(ChiTietHD obj) {
 		Connection connect = null;
-		String sql = "Insert into HoaDon Values(?,?,?,?,?)";
+		String sql = "Insert into ChiTietHD Values(?,?,?,?,?)";
 		PreparedStatement prepare = null;
 
 		try {
@@ -28,8 +28,8 @@ public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
 			prepare.setInt(1, obj.getMaHD());
 			prepare.setInt(2, obj.getMaSP());
 			prepare.setFloat(3, obj.getDonGia());
-			prepare.setInt(3, obj.getSoLuong());
-			prepare.setFloat(3, obj.getTongTien());
+			prepare.setInt(4, obj.getSoLuong());
+			prepare.setFloat(5, obj.getTongTien());
 			
 
 			connect.setAutoCommit(true);

@@ -25,8 +25,10 @@ import javax.swing.table.TableModel;
 import cmc.data.SqlQuerry;
 import cmc.data.business.ChitietHDBUS;
 import cmc.data.business.NhomSPBUS;
+import cmc.data.business.SanPhamBUS;
 import cmc.data.model.ChiTietHD;
 import cmc.data.model.NhomSP;
+import cmc.data.model.SanPham;
 
 public class ChitiethoadonUI extends JFrame {
 
@@ -135,7 +137,7 @@ public class ChitiethoadonUI extends JFrame {
 		 */
 
 		ChitietHDBUS chitietHDBUS = new ChitietHDBUS();
-		List<ChiTietHD> chiTietHDs = chitietHDBUS.getList(SqlQuerry.SELECT_ALL_NHOM_SP);
+		List<ChiTietHD> chiTietHDs = chitietHDBUS.getList(SqlQuerry.SELECT_ALL_MaHD);
 		for (ChiTietHD chiTietHD : chiTietHDs) {
 			values.add(new String[] { String.valueOf(chiTietHD.getMaHD()), String.valueOf(chiTietHD.getMaSP()),String.valueOf(chiTietHD.getDonGia()) , 
 					 String.valueOf(chiTietHD.getSoLuong()),String.valueOf(chiTietHD.getTongTien())});
@@ -177,19 +179,31 @@ public class ChitiethoadonUI extends JFrame {
 		btnNewButton.setBounds(26, 194, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("Update");
+		JButton button = new JButton("Insert");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+			try {
+				ChitietHDBUS chitietHDBUS = new ChitietHDBUS();
+				ChiTietHD obj = new ChiTietHD();
+				obj.setMaSP(Integer.parseInt(txtMaSP.getText()));
+				obj.setDonGia(Float.parseFloat(txtdongia.getText()));
+				obj.setSoLuong(Integer.parseInt(txtsoLuong.getText()));
+				obj.setTongTien(Float.parseFloat(txttongTien.getText()));
+				chitietHDBUS.insert(obj);
+				JOptionPane.showMessageDialog(null, "Insert successfully!");
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Insert fail!");
 			}
+		}
 		});
 		button.setBounds(122, 194, 85, 21);
 		contentPane.add(button);
 
-		JButton button_1 = new JButton("Delete");
+		JButton button_1 = new JButton("Update");
 		button_1.setBounds(217, 194, 85, 21);
 		contentPane.add(button_1);
 
-		JButton button_2 = new JButton("Get First");
+		JButton button_2 = new JButton("Delete");
 		button_2.setBounds(312, 194, 85, 21);
 		contentPane.add(button_2);
 

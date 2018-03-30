@@ -113,7 +113,7 @@ public class KhachHangUI extends JFrame {
 		 */
 
 		KhachHangBUS khachangBUS = new KhachHangBUS();
-		List<KhachHang> khachangs = khachangBUS.getList(SqlQuerry.SELECT_ALL_NHOM_SP);
+		List<KhachHang> khachangs = khachangBUS.getList(SqlQuerry.SELECT_ALL_SAN_PHAM);
 		for (KhachHang khachhang : khachangs) {
 			values.add(new String[] { String.valueOf(khachhang.getMaKH()), khachhang.getTenKH(), khachhang.getTenKH(),khachhang.getUserName(), khachhang.getPassword(), khachhang.getTenCongTy(), khachhang.getDiaChi(),khachhang.getThanhPho()});
 		}
