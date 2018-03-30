@@ -14,7 +14,7 @@ public class SanPham {
 	private String tenSP;
 	private int maNSP;
 	private float donGia;
-	private int soLuongHang;
+	private int soLuong;
 	private String anh;
 
 	/**
@@ -28,16 +28,16 @@ public class SanPham {
 	 * @param tenSP
 	 * @param maNSP
 	 * @param donGia
-	 * @param soLuongHang
+	 * @param soLuong
 	 * @param anh
 	 */
-	public SanPham(int maSP, String tenSP, int maNSP, float donGia, int soLuongHang, String anh) {
+	public SanPham(int maSP, String tenSP, int maNSP, float donGia, int soLuong, String anh) {
 		super();
 		this.maSP = maSP;
 		this.tenSP = tenSP;
 		this.maNSP = maNSP;
 		this.donGia = donGia;
-		this.soLuongHang = soLuongHang;
+		this.soLuong = soLuong;
 		this.anh = anh;
 	}
 
@@ -111,16 +111,16 @@ public class SanPham {
 	/**
 	 * @return the soLuongHang
 	 */
-	public int getSoLuongHang() {
-		return soLuongHang;
+	public int getSoLuong() {
+		return soLuong;
 	}
 
 	/**
-	 * @param soLuongHang
+	 * @param soLuong
 	 *            the soLuongHang to set
 	 */
-	public void setSoLuongHang(int soLuongHang) {
-		this.soLuongHang = soLuongHang;
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
 	}
 
 	/**

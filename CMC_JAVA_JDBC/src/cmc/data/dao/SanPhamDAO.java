@@ -17,7 +17,7 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 	@Override
 	public boolean insert(SanPham obj) {
 		Connection connect = null;
-		String sql = "Insert INTO dbo.SanPham (tenSP,maNSP,donGia,  soLuongHang, anh)VALUES (?, ?,?,?, ?)";
+		String sql = "Insert INTO dbo.SanPham (tenSP,maNSP,donGia,  soLuong, anh)VALUES (?, ?,?,?, ?)";
 		PreparedStatement prepare = null;
 
 		try {
@@ -27,7 +27,7 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 			prepare.setString(1, obj.getTenSP());
 			prepare.setInt(2,obj.getMaNSP());
 			prepare.setFloat(3, obj.getDonGia());
-			prepare.setInt(4, obj.getSoLuongHang());
+			prepare.setInt(4, obj.getSoLuong());
 			prepare.setString(5, obj.getAnh());
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();
@@ -72,7 +72,7 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 				sanPham.setTenSP(rs.getString("tenSP"));
 				sanPham.setMaNSP(rs.getInt("maNSP"));
 				sanPham.setDonGia(rs.getFloat("donGia"));
-				sanPham.setSoLuongHang(rs.getInt("soLuongHang"));
+				sanPham.setSoLuong(rs.getInt("soLuong"));
 				sanPham.setAnh(rs.getString("anh"));
 				list.add(sanPham);
 			}
@@ -139,12 +139,12 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 		try {
 			connect = ConnectDB.connect();
 			statement = connect.createStatement();
-			String sql = "update SanPham set  tenSP = ?,maNSP=?,donGia=?,soLuongHang=?,anh=? where maSP = ?";
+			String sql = "update SanPham set  tenSP = ?,maNSP=?,donGia=?,soLuong=?,anh=? where maSP = ?";
 			PreparedStatement prepare = connect.prepareStatement(sql);
 			prepare.setString(1, obj.getTenSP());
 			prepare.setInt(2, obj.getMaNSP());
 			prepare.setFloat(3, obj.getDonGia());
-			prepare.setInt(4, obj.getSoLuongHang());
+			prepare.setInt(4, obj.getSoLuong());
 			prepare.setString(5, obj.getAnh());
 			prepare.setInt(6, obj.getMaSP());
 			check = prepare.executeUpdate();

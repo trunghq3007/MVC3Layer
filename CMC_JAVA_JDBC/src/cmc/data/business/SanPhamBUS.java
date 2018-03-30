@@ -30,7 +30,7 @@ public class SanPhamBUS implements BaseBusinessInterface<SanPham> {
 			System.out.print(sanPham.getTenSP() + "/");
 			System.out.print(sanPham.getMaNSP() + "/");
 			System.out.print(sanPham.getDonGia() + "/");
-			System.out.print(sanPham.getSoLuongHang()+ "/");
+			System.out.print(sanPham.getSoLuong()+ "/");
 			System.out.println(sanPham.getAnh());
 			System.out.println();
 		}
