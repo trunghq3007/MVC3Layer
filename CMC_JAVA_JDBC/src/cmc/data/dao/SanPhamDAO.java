@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import cmc.data.model.NhomSP;
-import cmc.data.model.SanPham;
 import cmc.data.model.SanPham;
 import cmc.data.sqlserver.ConnectDB;
 
@@ -19,20 +17,18 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 	@Override
 	public boolean insert(SanPham obj) {
 		Connection connect = null;
-		String sql = "Insert into SanPham Values(?,?,?,?,?,?)";
+		String sql = "Insert INTO dbo.SanPham (tenSP,maNSP,donGia,  soLuong, anh)VALUES (?, ?,?,?, ?)";
 		PreparedStatement prepare = null;
 
 		try {
 			connect = ConnectDB.connect();
 			prepare = connect.prepareStatement(sql);
 			connect.setAutoCommit(false);
-
-			prepare.setInt(1, obj.getMaSP());
-			prepare.setString(2, obj.getTenSP());
-			prepare.setInt(3,obj.getMaNSP());
-			prepare.setFloat(4, obj.getDonGia());
-			prepare.setInt(5, obj.getSoLuongHang());
-			prepare.setString(6, obj.getAnh());
+			prepare.setString(1, obj.getTenSP());
+			prepare.setInt(2,obj.getMaNSP());
+			prepare.setFloat(3, obj.getDonGia());
+			prepare.setInt(4, obj.getSoLuong());
+			prepare.setString(5, obj.getAnh());
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();
 		} catch (Exception e) {
@@ -76,7 +72,7 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 				sanPham.setTenSP(rs.getString("tenSP"));
 				sanPham.setMaNSP(rs.getInt("maNSP"));
 				sanPham.setDonGia(rs.getFloat("donGia"));
-				sanPham.setSoLuongHang(rs.getInt("soLuongHang"));
+				sanPham.setSoLuong(rs.getInt("soLuong"));
 				sanPham.setAnh(rs.getString("anh"));
 				list.add(sanPham);
 			}
@@ -143,12 +139,12 @@ public class SanPhamDAO implements BaseDaoInterface<SanPham> {
 		try {
 			connect = ConnectDB.connect();
 			statement = connect.createStatement();
-			String sql = "update SanPham set  tenSP = ?,maNSP=?,donGia=?,soLuongHang=?,anh=? where maSP = ?";
+			String sql = "update SanPham set  tenSP = ?,maNSP=?,donGia=?,soLuong=?,anh=? where maSP = ?";
 			PreparedStatement prepare = connect.prepareStatement(sql);
 			prepare.setString(1, obj.getTenSP());
 			prepare.setInt(2, obj.getMaNSP());
 			prepare.setFloat(3, obj.getDonGia());
-			prepare.setInt(4, obj.getSoLuongHang());
+			prepare.setInt(4, obj.getSoLuong());
 			prepare.setString(5, obj.getAnh());
 			prepare.setInt(6, obj.getMaSP());
 			check = prepare.executeUpdate();

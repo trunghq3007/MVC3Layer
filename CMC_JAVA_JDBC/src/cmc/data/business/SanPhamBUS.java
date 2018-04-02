@@ -1,11 +1,13 @@
 package cmc.data.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cmc.data.dao.SanPhamDAO;
 import cmc.data.model.SanPham;
 
 public class SanPhamBUS implements BaseBusinessInterface<SanPham> {
+
 
 	@Override
 	public boolean insert(SanPham obj) {
@@ -14,8 +16,10 @@ public class SanPhamBUS implements BaseBusinessInterface<SanPham> {
 
 	@Override
 	public List<SanPham> getList(String sql) {
-		// TODO Auto-generated method stub
-		return null;
+		List<SanPham> list = new ArrayList<>();
+		SanPhamDAO sanPhamDAO = new SanPhamDAO();
+		list = sanPhamDAO.getList(sql);
+		return list;
 	}
 	public void showSanPhamList(List<SanPham> list) {
 
@@ -26,7 +30,7 @@ public class SanPhamBUS implements BaseBusinessInterface<SanPham> {
 			System.out.print(sanPham.getTenSP() + "/");
 			System.out.print(sanPham.getMaNSP() + "/");
 			System.out.print(sanPham.getDonGia() + "/");
-			System.out.print(sanPham.getSoLuongHang()+ "/");
+			System.out.print(sanPham.getSoLuong()+ "/");
 			System.out.println(sanPham.getAnh());
 			System.out.println();
 		}
