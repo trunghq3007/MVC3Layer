@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cmc.data.business.StudentBUS;
+import cmc.data.model.KhachHang;
 import cmc.data.model.Student;
 import java.awt.Color;
 import javax.swing.JToolBar;
@@ -113,7 +114,7 @@ public class LoginUI extends JFrame {
 				String userName = txtUsername.getText();
 				String password = txtPassword.getText();
 				// lấy ra danh sách student
-				List<Student> listStudent = studentBUS.getAllStudent();
+				List<KhachHang> listKhachhang = studentBUS.getAllStudent();
 				// duyệt danh sách kiểm tra có user không
 				boolean checkDangNhap = false;
 				for (Student student : listStudent) {
