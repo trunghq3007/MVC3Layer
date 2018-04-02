@@ -18,7 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import cmc.data.business.KhachHangBUS;
 import cmc.data.business.StudentBUS;
+import cmc.data.dao.KhachHangDAO;
 import cmc.data.model.KhachHang;
 import cmc.data.model.Student;
 import java.awt.Color;
@@ -36,7 +38,7 @@ public class LoginUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static StudentBUS studentBUS;
+	static KhachHangBUS khachHangBUS;
 	private JPanel contentPane;
 	private JTextField txtUsername;
 	private JTextField txtPassword;
@@ -70,7 +72,7 @@ public class LoginUI extends JFrame {
 	 */
 	public LoginUI() {
 		setTitle("Form login");
-		studentBUS = new StudentBUS();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -114,15 +116,16 @@ public class LoginUI extends JFrame {
 				String userName = txtUsername.getText();
 				String password = txtPassword.getText();
 				// lấy ra danh sách student
-				List<KhachHang> listKhachhang = studentBUS.getAllStudent();
+				khachHangBUS =  new KhachHangBUS();
+				List<KhachHang> listKhachHang = khachHangBUS.getList("select * from KhachHang");
 				// duyệt danh sách kiểm tra có user không
 				boolean checkDangNhap = false;
-				for (Student student : listStudent) {
-					if (student.getFullName().equals(userName.trim()) && password.equals("123456")) {
+				for (KhachHang khachhang : listKhachHang) {
+					if (khachhang.getUserName().equals(userName.trim()) && khachhang.getPassword().equals(password.trim())) {
 						// JOptionPane.showMessageDialog(null, "đăng nhập thành công");
 						checkDangNhap = true;
 						// ManageStudentUI
-						ManageStudentUI frame = new ManageStudentUI("Trang quản lí Student");
+						MainUI frame = new MainUI();
 						frame.setVisible(true);
 						dispose();
 						break;
@@ -148,17 +151,5 @@ public class LoginUI extends JFrame {
 		});
 		btnDangKi.setBounds(252, 201, 104, 19);
 		contentPane.add(btnDangKi);
-		
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(37, 10, 290, 30);
-		JButton button = new JButton("File");  
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		toolBar.add(button);  
-		toolBar.addSeparator();  
-		toolBar.add(new JButton("Edit"));  
-		contentPane.add(toolBar);
 	}
 }
