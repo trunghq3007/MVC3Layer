@@ -1,5 +1,6 @@
 package cmc.data.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmc.data.model.NhomSP;
-import cmc.data.model.Student;
 import cmc.data.sqlserver.ConnectDB;
 
 public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
@@ -91,6 +91,61 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 			if (statement != null) {
 				try {
 					statement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (connect != null) {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public List<NhomSP> getAll() {
+		Connection connect = null;
+		CallableStatement proc = null;
+		ResultSet rs = null;
+		List<NhomSP> list = null;
+		try {
+			connect = ConnectDB.connect();
+			list = new ArrayList<>();
+			// Statement creation
+
+			proc = connect.prepareCall("{call [spNhomSP-get-all]}");
+			// for retrieve data
+			rs = proc.executeQuery();
+			while (rs.next()) {
+				NhomSP nhomSP = new NhomSP();
+				nhomSP.setMaNSP(rs.getInt("maNSP"));
+				nhomSP.setTenNSP(rs.getString("tenNSP"));
+				list.add(nhomSP);
+			}
+			rs.close();
+			proc.close();
+			connect.close();
+			return list;
+		} catch (ClassNotFoundException e) {
+			return list;
+		} catch (SQLException e) {
+			return list;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (proc != null) {
+				try {
+					proc.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

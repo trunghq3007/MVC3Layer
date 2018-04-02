@@ -3,8 +3,6 @@ package cmc.data.business;
 import java.util.List;
 
 import cmc.data.dao.SanPhamDAO;
-import cmc.data.dao.StudentDAO;
-import cmc.data.model.SanPham;
 import cmc.data.model.SanPham;
 
 public class SanPhamBUS implements BaseBusinessInterface<SanPham> {

@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import cmc.data.business.StudentBUS;
 import cmc.data.model.Student;
 import java.awt.Color;
+import javax.swing.JToolBar;
+import javax.swing.JTabbedPane;
 
 /**
  * @description:
@@ -80,7 +82,7 @@ public class LoginUI extends JFrame {
 		JLabel lblNewLabel = new JLabel("Trang đăng nhập");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setBounds(111, 29, 240, 30);
+		lblNewLabel.setBounds(116, 49, 240, 30);
 		contentPane.add(lblNewLabel);
 
 		JLabel lbl = new JLabel("Username");
@@ -145,5 +147,17 @@ public class LoginUI extends JFrame {
 		});
 		btnDangKi.setBounds(252, 201, 104, 19);
 		contentPane.add(btnDangKi);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setBounds(37, 10, 290, 30);
+		JButton button = new JButton("File");  
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		toolBar.add(button);  
+		toolBar.addSeparator();  
+		toolBar.add(new JButton("Edit"));  
+		contentPane.add(toolBar);
 	}
 }

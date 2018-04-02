@@ -21,6 +21,14 @@ public class NhomSPBUS implements BaseBusinessInterface<NhomSP> {
 		return list;
 	}
 
+	public List<NhomSP> getAll() {
+		List<NhomSP> list = new ArrayList<>();
+		NhomSPDAO nhomSPDAO = new NhomSPDAO();
+		list = nhomSPDAO.getAll();
+		return list;
+
+	}
+
 	@Override
 	public boolean delete(NhomSP nhomSP) {
 		NhomSPDAO nhomSPDAO = new NhomSPDAO();
