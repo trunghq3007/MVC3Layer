@@ -3,6 +3,8 @@
  */
 package cmc.data.model;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: Admin
@@ -114,6 +116,11 @@ public class ChiTietHD {
 	 */
 	public void setTongTien(float tongTien) {
 		this.tongTien = tongTien;
+	}
+
+	public List<ChiTietHD> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

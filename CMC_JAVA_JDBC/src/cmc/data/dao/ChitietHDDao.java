@@ -1,5 +1,6 @@
 package cmc.data.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import cmc.data.model.ChiTietHD;
 import cmc.data.model.HoaDon;
+import cmc.data.model.NhomSP;
 import cmc.data.sqlserver.ConnectDB;
 
 public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
@@ -109,6 +111,63 @@ public class ChitietHDDao implements BaseDaoInterface<ChiTietHD> {
 			}
 		}
 	}
+	}
+	public List<ChiTietHD> getAll() {
+		Connection connect = null;
+		CallableStatement proc = null;
+		ResultSet rs = null;
+		List<ChiTietHD> list = null;
+		try {
+			connect = ConnectDB.connect();
+			list = new ArrayList<>();
+			// Statement creation
+
+			proc = connect.prepareCall("{call [chitietHDGetAll]}");
+			// for retrieve data
+			rs = proc.executeQuery();
+			while (rs.next()) {
+				ChiTietHD chiTietHD = new ChiTietHD();
+				chiTietHD.setMaHD(rs.getInt("maHD"));
+				chiTietHD.setMaSP(rs.getInt("maSP"));
+				chiTietHD.setDonGia(rs.getFloat("dongia"));
+				chiTietHD.setSoLuong(rs.getInt("Soluong"));
+				chiTietHD.setDonGia(rs.getFloat("tongtien"));
+				list.add(chiTietHD);
+			}
+			rs.close();
+			proc.close();
+			connect.close();
+			return list;
+		} catch (ClassNotFoundException e) {
+			return list;
+		} catch (SQLException e) {
+			return list;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (proc != null) {
+				try {
+					proc.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (connect != null) {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	@Override

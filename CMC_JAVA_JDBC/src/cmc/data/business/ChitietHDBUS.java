@@ -22,6 +22,14 @@ public class ChitietHDBUS implements BaseBusinessInterface<ChiTietHD> {
 		list = chiTietHDDao.getList(sql);
 		return list;
 	}
+	public List<ChiTietHD> getAll() {
+		List<ChiTietHD> list = new ArrayList<>();
+		ChitietHDDao chitietHDDao = new ChitietHDDao();
+		list = chitietHDDao.getAll();
+		return list;
+
+	}
+
 
 	@Override
 	public boolean delete(ChiTietHD chitietHD) {
