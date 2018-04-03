@@ -79,7 +79,7 @@ public class ChitiethoadonUI extends JFrame {
 		contentPane.add(lblMHD);
 
 		JLabel lblTSP = new JLabel("Mã SP");
-		lblTSP.setBounds(332, 74, 45, 13);
+		lblTSP.setBounds(313, 74, 64, 13);
 		contentPane.add(lblTSP);
 		
 		JLabel lbLDG = new JLabel("Đơn giá");
@@ -87,7 +87,7 @@ public class ChitiethoadonUI extends JFrame {
 		contentPane.add(lbLDG);
 
 		JLabel lbLSL = new JLabel("Số Lượng");
-		lbLSL.setBounds(332, 98, 45, 13);
+		lbLSL.setBounds(313, 98, 64, 13);
 		contentPane.add(lbLSL);
 		
 		JLabel lbLTT = new JLabel("Tổng tiền");
@@ -178,25 +178,21 @@ public class ChitiethoadonUI extends JFrame {
 		btnNewButton.setBounds(26, 194, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("New button");
-		button.setBounds(122, 194, 85, 21);
+		JButton button = new JButton("Update");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(155, 194, 85, 21);
 		contentPane.add(button);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(217, 194, 85, 21);
+		JButton button_1 = new JButton("Delete");
+		button_1.setBounds(292, 194, 85, 21);
 		contentPane.add(button_1);
 
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(312, 194, 85, 21);
+		JButton button_2 = new JButton("Insert");
+		button_2.setBounds(431, 194, 85, 21);
 		contentPane.add(button_2);
-
-		JButton button_3 = new JButton("New button");
-		button_3.setBounds(407, 194, 85, 21);
-		contentPane.add(button_3);
-
-		JButton button_4 = new JButton("New button");
-		button_4.setBounds(508, 194, 85, 21);
-		contentPane.add(button_4);
 
 	}
 
