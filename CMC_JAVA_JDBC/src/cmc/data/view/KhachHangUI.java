@@ -57,8 +57,6 @@ public class KhachHangUI extends JFrame {
 			public void run() {
 				try {
 					KhachHangUI frame = new KhachHangUI();
-				
-					// location center of screen
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -72,7 +70,7 @@ public class KhachHangUI extends JFrame {
 	 * Create the frame.
 	 */
 	public KhachHangUI() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -121,7 +119,9 @@ public class KhachHangUI extends JFrame {
 		KhachHangBUS khachangBUS = new KhachHangBUS();
 		List<KhachHang> khachangs = khachangBUS.getList(SqlQuerry.SELECT_ALL_KhachHang);
 		for (KhachHang khachhang : khachangs) {
-			values.add(new String[] { String.valueOf(khachhang.getMaKH()), khachhang.getTenKH(),khachhang.getUserName(), khachhang.getPassword(), khachhang.getTenCongTy(), khachhang.getDiaChi(),khachhang.getThanhPho()});
+			values.add(new String[] { String.valueOf(khachhang.getMaKH()), khachhang.getTenKH(),
+					khachhang.getUserName(), khachhang.getPassword(), khachhang.getTenCongTy(), khachhang.getDiaChi(),
+					khachhang.getThanhPho() });
 		}
 		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 
@@ -129,18 +129,18 @@ public class KhachHangUI extends JFrame {
 		scrollPane.setToolTipText("");
 		scrollPane.setBounds(26, 464, 567, 260);
 		contentPane.add(scrollPane);
-		
-				table = new JTable(tableModel);
-				scrollPane.setViewportView(table);
-				table.setFillsViewportHeight(true);
-				table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent event) {
-						// do some actions here, for example
-						// print first column value from selected row
-						// System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
-						JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(), 0).toString());
-					}
-				});
+
+		table = new JTable(tableModel);
+		scrollPane.setViewportView(table);
+		table.setFillsViewportHeight(true);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				// do some actions here, for example
+				// print first column value from selected row
+				// System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+				JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(), 0).toString());
+			}
+		});
 
 		JButton btnNewButton = new JButton("New");
 		btnNewButton.setBounds(26, 346, 85, 21);
@@ -157,7 +157,7 @@ public class KhachHangUI extends JFrame {
 					String tencongty = txttencongty.getText().trim();
 					String diachi = txtdiachi.getText().trim();
 					String thanhpho = txtthanhpho.getText().trim();
-					
+
 					// and refresh data in table
 				}
 			}
@@ -175,47 +175,47 @@ public class KhachHangUI extends JFrame {
 		JButton buttonInsert = new JButton("Insert");
 		buttonInsert.setBounds(313, 346, 85, 21);
 		contentPane.add(buttonInsert);
-		
+
 		JLabel lblusername = new JLabel("username");
 		lblusername.setBounds(26, 163, 128, 16);
 		contentPane.add(lblusername);
-		
+
 		txtusername = new JTextField();
 		txtusername.setBounds(200, 160, 234, 22);
 		contentPane.add(txtusername);
 		txtusername.setColumns(10);
-		
+
 		JLabel lblpassword = new JLabel("Password");
 		lblpassword.setBounds(26, 196, 128, 13);
 		contentPane.add(lblpassword);
-		
+
 		txtpassword = new JTextField();
 		txtpassword.setBounds(200, 195, 234, 22);
 		contentPane.add(txtpassword);
 		txtpassword.setColumns(10);
-		
+
 		JLabel lbltenCongTy = new JLabel("Tên Công Ty");
 		lbltenCongTy.setBounds(26, 230, 128, 16);
 		contentPane.add(lbltenCongTy);
-		
+
 		txttencongty = new JTextField();
 		txttencongty.setBounds(200, 230, 234, 22);
 		contentPane.add(txttencongty);
 		txttencongty.setColumns(10);
-		
+
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setBounds(26, 264, 128, 16);
 		contentPane.add(lblDiaChi);
-		
+
 		txtdiachi = new JTextField();
 		txtdiachi.setBounds(200, 265, 234, 22);
 		contentPane.add(txtdiachi);
 		txtdiachi.setColumns(10);
-		
+
 		JLabel lblThanhPho = new JLabel("Thành Phố");
 		lblThanhPho.setBounds(26, 304, 128, 16);
 		contentPane.add(lblThanhPho);
-		
+
 		txtthanhpho = new JTextField();
 		txtthanhpho.setBounds(200, 301, 234, 22);
 		contentPane.add(txtthanhpho);
