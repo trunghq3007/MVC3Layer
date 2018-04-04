@@ -57,6 +57,8 @@ public class KhachHangUI extends JFrame {
 			public void run() {
 				try {
 					KhachHangUI frame = new KhachHangUI();
+				
+					// location center of screen
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -70,7 +72,7 @@ public class KhachHangUI extends JFrame {
 	 * Create the frame.
 	 */
 	public KhachHangUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 650, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
