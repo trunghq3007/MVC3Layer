@@ -157,10 +157,10 @@ public class NhanVienUI extends JFrame {
 		textField_GhiChu.setBounds(198, 372, 398, 28);
 		contentPane.add(textField_GhiChu);
 		
-		JButton btnAddNew = new JButton("Add New");
+		JButton btnAddNew = new JButton("AddNew");
 		btnAddNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btnAddNew.getText().equals("Add New")) {
+				if(btnAddNew.getText().equals("AddNew")) {
 					btnAddNew.setText("Save");
 				}else {
 					//save
@@ -182,6 +182,10 @@ public class NhanVienUI extends JFrame {
 		contentPane.add(btnUpdate);
 		
 		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnInsert.setBounds(349, 462, 89, 23);
 		contentPane.add(btnInsert);
 		
