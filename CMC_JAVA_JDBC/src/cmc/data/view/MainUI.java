@@ -49,6 +49,8 @@ public class MainUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// frame = new KhachHangUI();
 				// frame.setVisible(true);
+				NhanVienUI nhanVienUI = new NhanVienUI();
+				nhanVienUI.setVisible(true);
 
 			}
 		});
@@ -87,6 +89,14 @@ public class MainUI extends JFrame {
 		JButton btnNewButton_4 = new JButton("Hóa đơn\r\n");
 		toolBar.addSeparator();
 		toolBar.add(btnNewButton_4);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+			}
+		});
 
 		JButton btnNewButton_5 = new JButton("Chi tiết hóa đơn \r\n");
 		btnNewButton_5.addActionListener(new ActionListener() {

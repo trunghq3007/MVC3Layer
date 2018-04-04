@@ -126,6 +126,9 @@ public class LoginUI extends JFrame {
 						checkDangNhap = true;
 						// ManageStudentUI
 						MainUI frame = new MainUI();
+						// location center of screen
+						frame.setLocationRelativeTo(null);
+						frame.setExtendedState(MAXIMIZED_BOTH);
 						frame.setVisible(true);
 						dispose();
 						break;
