@@ -28,6 +28,11 @@ import javax.swing.table.TableModel;
 import cmc.data.SqlQuerry;
 import cmc.data.business.KhachHangBUS;
 import cmc.data.model.KhachHang;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @description:
@@ -43,11 +48,11 @@ public class KhachHangUI extends JFrame {
 	private JTable table;
 	private TableModel tableModel;
 	private JScrollPane scrollPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtusername;
+	private JTextField txtpassword;
+	private JTextField txtTenCongTy;
+	private JTextField txtDiaChi;
+	private JTextField txtThanhPho;
 
 	/**
 	 * Launch the application.
@@ -70,7 +75,7 @@ public class KhachHangUI extends JFrame {
 	 * Create the frame.
 	 */
 	public KhachHangUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 650, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -124,7 +129,21 @@ public class KhachHangUI extends JFrame {
 		contentPane.add(scrollPane);
 		
 				table = new JTable(tableModel);
-				scrollPane.setViewportView(table);
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						int row = table.getSelectedRow();
+						TableModel model = table.getModel();
+						txtmaKH.setText(model.getValueAt(row, 0).toString());
+						txttenKH.setText(model.getValueAt(row, 1).toString());
+						txtusername.setText(model.getValueAt(row, 2).toString());
+						txtpassword.setText(model.getValueAt(row, 3).toString());
+						txtTenCongTy.setText(model.getValueAt(row, 4).toString());
+						txtDiaChi.setText((model.getValueAt(row, 5).toString()));
+						txtThanhPho.setText((model.getValueAt(row, 6).toString()));
+					}
+				});
+				scrollPane.setColumnHeaderView(table);
 				table.setFillsViewportHeight(true);
 				table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent event) {
@@ -151,70 +170,111 @@ public class KhachHangUI extends JFrame {
 		});
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("New button");
-		button.setBounds(122, 346, 85, 21);
-		contentPane.add(button);
+		JButton btnupdate = new JButton("update");
+		btnupdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					KhachHang khachhang = new KhachHang();
+					khachhang.setMaKH(Integer.parseInt(txtmaKH.getText()));
+					khachhang.setTenKH(txttenKH.getText());
+					khachhang.setUserName(txtusername.getText());
+					khachhang.setTenCongTy(txtTenCongTy.getText());
+					khachhang.setDiaChi(txtDiaChi.getText());
+					khachhang.setThanhPho(txtThanhPho.getText());
+					KhachHangBUS khachhangBUS = new KhachHangBUS();
+					khachhangBUS.insert(khachhang);
+					
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null,"loi");
+				}
+				
+			}
+		});
+		btnupdate.setBounds(122, 346, 85, 21);
+		contentPane.add(btnupdate);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(219, 346, 85, 21);
-		contentPane.add(button_1);
+		JButton btnDelete = new JButton("delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					KhachHangBUS khachhangbus = new KhachHangBUS();
+					KhachHang khachhang = new KhachHang();
+					khachhang.setMaKH(Integer.parseInt(txtmaKH.getText()));
+					khachhang.setTenKH(txttenKH.getText());
+					khachhang.setUserName(txtusername.getText());
+					khachhang.setPassword(txtpassword.getText());
+					khachhang.setTenCongTy(txtTenCongTy.getText());
+					khachhang.setDiaChi(txtDiaChi.getText());
+					khachhang.setThanhPho(txtThanhPho.getText());
+					khachhangbus.delete(khachhang);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "loi");
+				}
+			}
+		});
+		btnDelete.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnDelete.setBounds(219, 346, 85, 21);
+		contentPane.add(btnDelete);
 
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(313, 346, 85, 21);
-		contentPane.add(button_2);
+		JButton btnClear = new JButton("CLEAR");
+		btnClear.setBounds(495, 94, 85, 21);
+		contentPane.add(btnClear);
 
-		JButton button_3 = new JButton("New button");
-		button_3.setBounds(410, 346, 85, 21);
-		contentPane.add(button_3);
-
-		JButton button_4 = new JButton("New button");
-		button_4.setBounds(507, 346, 85, 21);
-		contentPane.add(button_4);
+		JButton btnSearch = new JButton("search");
+		btnSearch.setBounds(316, 346, 85, 21);
+		contentPane.add(btnSearch);
 		
 		JLabel lblusername = new JLabel("username");
 		lblusername.setBounds(26, 163, 128, 16);
 		contentPane.add(lblusername);
 		
-		textField = new JTextField();
-		textField.setBounds(200, 160, 234, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtusername = new JTextField();
+		txtusername.setBounds(200, 160, 234, 22);
+		contentPane.add(txtusername);
+		txtusername.setColumns(10);
 		
 		JLabel lblpassword = new JLabel("Password");
 		lblpassword.setBounds(26, 196, 128, 13);
 		contentPane.add(lblpassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(200, 195, 234, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtpassword = new JTextField();
+		txtpassword.setBounds(200, 195, 234, 22);
+		contentPane.add(txtpassword);
+		txtpassword.setColumns(10);
 		
 		JLabel lbltenCongTy = new JLabel("Tên Công Ty");
 		lbltenCongTy.setBounds(26, 230, 128, 16);
 		contentPane.add(lbltenCongTy);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(200, 230, 234, 22);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtTenCongTy = new JTextField();
+		txtTenCongTy.setBounds(200, 230, 234, 22);
+		contentPane.add(txtTenCongTy);
+		txtTenCongTy.setColumns(10);
 		
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setBounds(26, 264, 128, 16);
 		contentPane.add(lblDiaChi);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(200, 265, 234, 22);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtDiaChi = new JTextField();
+		txtDiaChi.setBounds(200, 265, 234, 22);
+		contentPane.add(txtDiaChi);
+		txtDiaChi.setColumns(10);
 		
 		JLabel lblThanhPho = new JLabel("Thành Phố");
 		lblThanhPho.setBounds(26, 304, 128, 16);
 		contentPane.add(lblThanhPho);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(200, 301, 234, 22);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtThanhPho = new JTextField();
+		txtThanhPho.setBounds(200, 301, 234, 22);
+		contentPane.add(txtThanhPho);
+		txtThanhPho.setColumns(10);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setEnabled(false);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ten khach hang", "username", "password", "ten cong ty", "dia chi", "thanh pho"}));
+		comboBox.setBounds(122, 380, 85, 22);
+		contentPane.add(comboBox);
 
 	}
 }
