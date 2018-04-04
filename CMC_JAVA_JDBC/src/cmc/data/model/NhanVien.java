@@ -35,6 +35,10 @@ public class NhanVien {
 	 * @param dienThoai
 	 * @param ghiChu
 	 */
+	public NhanVien() {
+		
+	}
+	
 	public NhanVien(int maNV, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String dienThoai,
 			String ghiChu) {
 		super();
