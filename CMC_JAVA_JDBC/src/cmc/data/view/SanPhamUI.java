@@ -72,7 +72,7 @@ public class SanPhamUI extends JFrame {
 	 * Create the frame.
 	 */
 	public SanPhamUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 820, 616);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -172,7 +172,7 @@ public class SanPhamUI extends JFrame {
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
-					sanPhamBus.update(obj);
+					sanPhamBus.spSanPhamUpdate(obj);
 					JOptionPane.showMessageDialog(null, "Updated successfully!!!");
 					refreshTable();
 				} catch (Exception ex) {
@@ -195,7 +195,7 @@ public class SanPhamUI extends JFrame {
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
-					sanPhamBus.delete(obj);
+					sanPhamBus.SpSanPhamDelete(obj);
 					JOptionPane.showMessageDialog(null, "Deleted successfully!!!");
 					clearFieldSanPham();
 					refreshTable();
@@ -229,7 +229,7 @@ public class SanPhamUI extends JFrame {
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
-					sanPhamBus.insert(obj);
+					sanPhamBus.spSanPhamInsert(obj);
 					JOptionPane.showMessageDialog(null, "Inserted successfully!!!");
 					refreshTable();
 				} catch (Exception ex) {
@@ -285,7 +285,7 @@ public class SanPhamUI extends JFrame {
 		columns.add("Link ảnh SP");
 
 		SanPhamBUS sanPhamBUS = new SanPhamBUS();
-		List<SanPham> sanPhams = sanPhamBUS.getList(SqlQuerry.SELECT_ALL_SAN_PHAM);
+		List<SanPham> sanPhams = sanPhamBUS.spSanPhamGetAll();
 		for (SanPham sanPham : sanPhams) {
 			values.add(new String[] { String.valueOf(sanPham.getMaSP()), sanPham.getTenSP(),
 					String.valueOf(sanPham.getMaNSP()), String.valueOf(sanPham.getDonGia()),
