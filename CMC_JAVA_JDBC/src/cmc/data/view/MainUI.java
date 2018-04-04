@@ -47,8 +47,8 @@ public class MainUI extends JFrame {
 		JButton btnNewButton = new JButton("Nhân viên\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 NhanVienUI  frame = new NhanVienUI();
-				 frame.setVisible(true);
+				 NhanVienUI  nhanVienUI = new NhanVienUI();
+				 nhanVienUI.setVisible(true);
 
 			}
 		});
