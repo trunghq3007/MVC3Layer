@@ -5,6 +5,7 @@ package cmc.data.dao;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class NhanVienDAO implements BaseDaoInterface<NhanVien> {
 	@Override
 	public boolean insert(NhanVien obj) {
 		Connection connect = null;
-		String sql = "Insert into NhanVien Values(?,?,?,?,?,?,?)";
+		String sql = "Insert into NhanVien Values(?,?,?,?,?,?)";
 		PreparedStatement prepare = null;
 
 		try {
@@ -35,13 +36,13 @@ public class NhanVienDAO implements BaseDaoInterface<NhanVien> {
 			prepare = connect.prepareStatement(sql);
 			connect.setAutoCommit(false);
 
-			prepare.setInt(1, obj.getMaNV());
-			prepare.setString(2, obj.getHoTen());
-			prepare.setString(3, obj.getGioiTinh());
-			prepare.setDate(4, obj.getNgaySinh());
-			prepare.setString(5, obj.getDiaChi());
-			prepare.setString(6, obj.getDienThoai());
-			prepare.setString(7, obj.getGhiChu());
+//			prepare.setInt(1, obj.getMaNV());
+			prepare.setString(1, obj.getHoTen());
+			prepare.setString(2, obj.getGioiTinh());
+			prepare.setDate(3, obj.getNgaySinh());
+			prepare.setString(4, obj.getDiaChi());
+			prepare.setString(5, obj.getDienThoai());
+			prepare.setString(6, obj.getGhiChu());
 
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();

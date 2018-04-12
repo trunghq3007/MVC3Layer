@@ -38,9 +38,16 @@ public class NhanVien {
 	public NhanVien() {
 		
 	}
-	
-	public NhanVien(int maNV, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String dienThoai,
-			String ghiChu) {
+	public NhanVien(int maNV, String hoTen, String gioiTinh, String diaChi, String dienThoai, String ghiChu) {
+		super();
+		this.maNV = maNV;
+		this.hoTen = hoTen;
+		this.gioiTinh = gioiTinh;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.ghiChu = ghiChu;
+	}
+	public NhanVien(int maNV, String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String dienThoai, String ghiChu) {
 		super();
 		this.maNV = maNV;
 		this.hoTen = hoTen;
@@ -50,7 +57,23 @@ public class NhanVien {
 		this.dienThoai = dienThoai;
 		this.ghiChu = ghiChu;
 	}
-
+	public NhanVien(String hoTen, String gioiTinh, Date ngaySinh, String diaChi, String dienThoai, String ghiChu) {
+		super();
+		this.hoTen = hoTen;
+		this.gioiTinh = gioiTinh;
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.ghiChu = ghiChu;
+	}
+	public NhanVien(String hoTen, String gioiTinh, String diaChi, String dienThoai, String ghiChu) {
+		super();
+		this.hoTen = hoTen;
+		this.gioiTinh = gioiTinh;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.ghiChu = ghiChu;
+	}
 	/**
 	 * @return the maNV
 	 */

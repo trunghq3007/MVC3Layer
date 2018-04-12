@@ -9,9 +9,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.chainsaw.Main;
+
 import cmc.data.SqlQuerry;
 import cmc.data.business.KhachHangBUS;
 import cmc.data.business.NhanVienBUS;
+import cmc.data.dao.NhanVienDAO;
 import cmc.data.model.KhachHang;
 import cmc.data.model.NhanVien;
 
@@ -26,24 +30,36 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.components.JSpinField;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.ListSelectionModel;
 
 public class NhanVienUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_MaNV;
 	private JTextField textField_HoTen;
 	private JTextField textField_GioiTinh;
-	private JTextField textField_NgaySinh;
 	private JTextField textField_DiaChi;
 	private JTextField textField_DienThoai;
 	private JTextField textField_GhiChu;
 	private JScrollPane scrollPane;
 	private JTable table;
 	private TableModel tableModel;
+	private JCalendar dateChooser;
+	private static Logger log;
+	private JTextField textField_NgaySinh;
 
 	
 
@@ -51,12 +67,18 @@ public class NhanVienUI extends JFrame {
 	 * Create the frame.
 	 */
 	public NhanVienUI() {
+		log = Logger.getLogger(NhanVienUI.class);
+		log.info("Hello, this is an info message!");
+//		log.warn("Warning!");		
+//		log.error("Error need fix!");
+//		log.debug("Hello, this is a debug message!");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 655, 1026);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		NhanVienUI_Update nvUpdateForm = new NhanVienUI_Update();
 		
 		List<String> columns = new ArrayList<String>();
 		List<String[]> values = new ArrayList<String[]>();
@@ -77,7 +99,7 @@ public class NhanVienUI extends JFrame {
 		NhanVienBUS nhanvienBUS = new NhanVienBUS();
 		List<NhanVien> nhanvien = nhanvienBUS.getList(SqlQuerry.SELECT_ALL_NhanVien);
 		for (NhanVien nv : nhanvien) {
-			values.add(new String[] { String.valueOf(nv.getMaNV()), nv.getHoTen(), nv.getGioiTinh(), nv.getDiaChi(), nv.getNgaySinh().toString(), nv.getDiaChi(), nv.getDienThoai(), nv.getGhiChu()});
+			values.add(new String[] { String.valueOf(nv.getMaNV()), nv.getHoTen(), nv.getGioiTinh(), nv.getNgaySinh().toString(), nv.getDiaChi(), nv.getDienThoai(), nv.getGhiChu()});
 		}
 		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 		
@@ -87,117 +109,180 @@ public class NhanVienUI extends JFrame {
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblTitle);
 		
-		JLabel lblNhanVien = new JLabel("Mã nhân viên");
-		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNhanVien.setBounds(32, 85, 100, 28);
-		contentPane.add(lblNhanVien);
-		
 		JLabel lblHoTen = new JLabel("Họ tên");
 		lblHoTen.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblHoTen.setBounds(32, 132, 100, 27);
+		lblHoTen.setBounds(32, 72, 100, 27);
 		contentPane.add(lblHoTen);
 		
 		JLabel lblGioiTinh = new JLabel("Giới tính");
 		lblGioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblGioiTinh.setBounds(32, 179, 100, 27);
+		lblGioiTinh.setBounds(32, 119, 100, 27);
 		contentPane.add(lblGioiTinh);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày sinh");
 		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNgaySinh.setBounds(32, 226, 100, 27);
+		lblNgaySinh.setBounds(32, 166, 100, 27);
 		contentPane.add(lblNgaySinh);
 		
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDiaChi.setBounds(32, 271, 100, 27);
+		lblDiaChi.setBounds(32, 211, 100, 27);
 		contentPane.add(lblDiaChi);
 		
 		JLabel lblDienThoai = new JLabel("Điện thoại");
 		lblDienThoai.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDienThoai.setBounds(32, 321, 100, 27);
+		lblDienThoai.setBounds(32, 261, 100, 27);
 		contentPane.add(lblDienThoai);
 		
 		JLabel lblGhiChu = new JLabel("Ghi chú");
 		lblGhiChu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblGhiChu.setBounds(32, 371, 100, 27);
+		lblGhiChu.setBounds(32, 311, 100, 27);
 		contentPane.add(lblGhiChu);
-		
-		textField_MaNV = new JTextField();
-		textField_MaNV.setBounds(198, 85, 398, 28);
-		contentPane.add(textField_MaNV);
-		textField_MaNV.setColumns(10);
 		
 		textField_HoTen = new JTextField();
 		textField_HoTen.setColumns(10);
-		textField_HoTen.setBounds(198, 133, 398, 28);
+		textField_HoTen.setBounds(198, 73, 398, 28);
 		contentPane.add(textField_HoTen);
 		
 		textField_GioiTinh = new JTextField();
 		textField_GioiTinh.setColumns(10);
-		textField_GioiTinh.setBounds(198, 180, 398, 28);
+		textField_GioiTinh.setBounds(198, 120, 398, 28);
 		contentPane.add(textField_GioiTinh);
 		
 		textField_NgaySinh = new JTextField();
 		textField_NgaySinh.setColumns(10);
-		textField_NgaySinh.setBounds(198, 227, 398, 28);
+		textField_NgaySinh.setBounds(198, 167, 398, 28);
 		contentPane.add(textField_NgaySinh);
 		
 		textField_DiaChi = new JTextField();
 		textField_DiaChi.setColumns(10);
-		textField_DiaChi.setBounds(198, 272, 398, 28);
+		textField_DiaChi.setBounds(198, 212, 398, 28);
 		contentPane.add(textField_DiaChi);
 		
 		textField_DienThoai = new JTextField();
 		textField_DienThoai.setColumns(10);
-		textField_DienThoai.setBounds(198, 322, 398, 28);
+		textField_DienThoai.setBounds(198, 262, 398, 28);
 		contentPane.add(textField_DienThoai);
 		
 		textField_GhiChu = new JTextField();
 		textField_GhiChu.setColumns(10);
-		textField_GhiChu.setBounds(198, 372, 398, 28);
+		textField_GhiChu.setBounds(198, 312, 398, 28);
 		contentPane.add(textField_GhiChu);
 		
 		JButton btnAddNew = new JButton("AddNew");
 		btnAddNew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btnAddNew.getText().equals("AddNew")) {
-					btnAddNew.setText("Save");
-				}else {
-					//save
-					String MaNV = textField_MaNV.getText().trim();
-					String HoTen = textField_HoTen.getText().trim();
-					String GioiTinh = textField_GioiTinh.getText().trim();
-					String NgaySinh = textField_NgaySinh.getText().trim();
-					String DiaChi = textField_DiaChi.getText().trim();
-					String DienThoai = textField_DienThoai.getText().trim();
-					String GhiChu = textField_GhiChu.getText().trim();
+			public void actionPerformed(ActionEvent arg0) {
+				List<NhanVien> nhanvien = nhanvienBUS.getList(SqlQuerry.SELECT_ALL_NhanVien);
+				for (NhanVien nv : nhanvien) {
+					values.add(new String[] { String.valueOf(nv.getMaNV()), nv.getHoTen(), nv.getGioiTinh(), nv.getDiaChi(), nv.getNgaySinh().toString(), nv.getDiaChi(), nv.getDienThoai(), nv.getGhiChu()});
 				}
+				tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
 			}
 		});
-		btnAddNew.setBounds(31, 462, 89, 23);
+		btnAddNew.setBounds(31, 375, 89, 23);
 		contentPane.add(btnAddNew);
-		
-		JButton btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(184, 462, 89, 23);
-		contentPane.add(btnUpdate);
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				int MaNV = Integer.parseInt(textField_MaNV.getText().trim());
+				String HoTen = textField_HoTen.getText().trim();
+				String GioiTinh = textField_GioiTinh.getText().trim();		
+				
+
+//				java.util.Date NgaySinh_1 = dateChooser.getDate();
+//				Date NgaySinh = Date.valueOf(textField_NgaySinh.getText().trim());
+//				
+//				String stringDate = "22/01/2016";
+//				try {
+//					java.util.Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate);
+//				} catch (ParseException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+				
+				String DiaChi = textField_DiaChi.getText().trim();
+				String DienThoai = textField_DienThoai.getText().trim();
+				String GhiChu = textField_GhiChu.getText().trim();
+				
+				NhanVien nv = new NhanVien(HoTen, GioiTinh, DiaChi, DienThoai, GhiChu);
+				nhanvienBUS.insert(nv);
+				
 			}
 		});
-		btnInsert.setBounds(349, 462, 89, 23);
+		btnInsert.setBounds(185, 375, 89, 23);
 		contentPane.add(btnInsert);
 		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nvUpdateForm.setVisible(true);
+				nvUpdateForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnUpdate.setBounds(346, 375, 89, 23);
+		contentPane.add(btnUpdate);
+		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(507, 462, 89, 23);
+		btnDelete.setBounds(507, 375, 89, 23);
 		contentPane.add(btnDelete);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 552, 624, 424);
+		scrollPane.setBounds(10, 444, 624, 532);
 		contentPane.add(scrollPane);
 		
+		
 		table = new JTable(tableModel);
+		table.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				int rowIndex = table.getSelectedRow();
+				TableModel model = table.getModel();
+				String id = model.getValueAt(rowIndex, 0).toString();
+				String name = model.getValueAt(rowIndex, 1).toString();
+				String gender = model.getValueAt(rowIndex, 2).toString();
+				String birthday = model.getValueAt(rowIndex, 3).toString();
+				String address = model.getValueAt(rowIndex, 4).toString();
+				String phone = model.getValueAt(rowIndex, 5).toString();
+				String note = model.getValueAt(rowIndex, 6).toString();
+				
+				nvUpdateForm.id_label.setText(id);
+				nvUpdateForm.textField_name.setText(name);
+				nvUpdateForm.textField_gender.setText(gender);
+				nvUpdateForm.textField_birthday.setText(birthday);
+				nvUpdateForm.textField_address.setText(address);
+				nvUpdateForm.textField_phone.setText(phone);
+				nvUpdateForm.textField_note.setText(note);
+			}
+		});
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);

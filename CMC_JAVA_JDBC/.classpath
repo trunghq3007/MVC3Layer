@@ -4,5 +4,10 @@
 	<classpathentry kind="lib" path="libs/sqljdbc42.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="libs/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/iMIC_java/MVC3Layer/CMC_JAVA_JDBC/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/iMIC_java/MVC3Layer/CMC_JAVA_JDBC/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="D:/iMIC_java/MVC3Layer/CMC_JAVA_JDBC/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="D:/iMIC_java/MVC3Layer/CMC_JAVA_JDBC/jcalendar-1.4/lib/junit-4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
