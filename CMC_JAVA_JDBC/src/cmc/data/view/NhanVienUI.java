@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -40,11 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 import java.awt.event.ActionEvent;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.components.JSpinField;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.ListSelectionModel;
+
 
 public class NhanVienUI extends JFrame {
 
@@ -57,7 +54,7 @@ public class NhanVienUI extends JFrame {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private TableModel tableModel;
-	private JCalendar dateChooser;
+
 	private static Logger log;
 	private JTextField textField_NgaySinh;
 
