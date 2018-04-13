@@ -1,8 +1,5 @@
 package cmc.data.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,13 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.chainsaw.Main;
-
 import cmc.data.SqlQuerry;
-import cmc.data.business.KhachHangBUS;
 import cmc.data.business.NhanVienBUS;
-import cmc.data.dao.NhanVienDAO;
-import cmc.data.model.KhachHang;
 import cmc.data.model.NhanVien;
 
 import javax.swing.JLabel;
@@ -24,22 +16,14 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import java.awt.Color;
-import java.awt.Rectangle;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 import java.awt.event.ActionEvent;
 
 
