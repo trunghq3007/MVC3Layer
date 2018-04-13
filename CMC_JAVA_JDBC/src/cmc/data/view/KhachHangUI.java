@@ -175,7 +175,7 @@ public class KhachHangUI extends JFrame {
 					khachhang.setDiaChi(txtDiaChi.getText());
 					khachhang.setThanhPho(txtThanhPho.getText());
 					KhachHangBUS khachhangBUS = new KhachHangBUS();
-					khachhangBUS.update(khachhang);
+					khachhangBUS.insert(khachhang);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null,"loi");
 				}

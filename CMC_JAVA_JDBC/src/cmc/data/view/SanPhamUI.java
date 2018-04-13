@@ -287,7 +287,7 @@ public class SanPhamUI extends JFrame {
 
 	}
 	public void clearFieldSanPham() {
-		txtMaSP.setText("Auto-generated");
+		//txtMaSP.setText("Auto-generated");
 		txtTenSP.setText("");
 		txtMaNSP.setText("");
 		txtDonGia.setText("");

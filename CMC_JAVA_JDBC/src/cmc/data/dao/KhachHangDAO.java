@@ -21,7 +21,7 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 		log.debug("dang o KhacHang DAO thuc hien insert DAO");
 		log.info("dang o KhacHang DAO thuc hien insert DAO");
 		Connection connect = null;
-		String sql = "Insert into KhachHang Values(?,?,?,?,?,?,?)";
+		String sql = "Insert into KhachHang Values(?,?,?,?,?,?)";
 		PreparedStatement prepare = null;
 
 		try {
@@ -29,13 +29,13 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 			prepare = connect.prepareStatement(sql);
 			connect.setAutoCommit(false);
 
-			prepare.setInt(1, obj.getMaKH());
-			prepare.setString(2, obj.getTenKH());
-			prepare.setString(3, obj.getUserName());
-			prepare.setString(4, obj.getPassword());
-			prepare.setString(5, obj.getTenCongTy());
-			prepare.setString(6, obj.getDiaChi());
-			prepare.setString(7, obj.getThanhPho());
+			
+			prepare.setString(1, obj.getTenKH());
+			prepare.setString(2, obj.getUserName());
+			prepare.setString(3, obj.getPassword());
+			prepare.setString(4, obj.getTenCongTy());
+			prepare.setString(5, obj.getDiaChi());
+			prepare.setString(6, obj.getThanhPho());
 
 			connect.setAutoCommit(true);
 			prepare.executeUpdate();
@@ -154,10 +154,15 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 		int check = 0;
 		try {
 			connect = ConnectDB.connect();
-			String sql = "update NhomSP set diaChi = ? where maKH = ?";
+			String sql = "update SanPham set  tenKH = ?,username =?,password =?,tenCongTy=?,diaChi =?, thanhPho=? where maKH = ?";
 			PreparedStatement prepare = connect.prepareStatement(sql);
-			prepare.setString(1, obj.getDiaChi());
-			prepare.setInt(2, obj.getMaKH());
+			prepare.setString(1, obj.getTenKH());
+			prepare.setString(2, obj.getUserName());
+			prepare.setString(3, obj.getPassword());
+			prepare.setString(4, obj.getTenCongTy());
+			prepare.setString(5, obj.getDiaChi());
+			prepare.setString(6, obj.getThanhPho());
+			prepare.setInt(7, obj.getMaKH());
 			check = prepare.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

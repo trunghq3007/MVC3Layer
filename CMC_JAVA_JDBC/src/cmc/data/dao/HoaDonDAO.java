@@ -19,7 +19,7 @@ public class HoaDonDAO implements BaseDaoInterface<HoaDon> {
 	@Override
 	public boolean insert(HoaDon obj) {
 		Connection connect = null;
-		String sql = "Insert into HoaDon Values(?,?,?,?,?,)";
+		String sql = "Insert into HoaDon Values(?,?,?,?,?)";
 		PreparedStatement prepare = null;
 
 		try {

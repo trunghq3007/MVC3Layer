@@ -1,9 +1,13 @@
 package cmc.data.view;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,112 +27,80 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import cmc.data.SqlQuerry;
-import cmc.data.business.ChitietHDBUS;
-import cmc.data.business.NhomSPBUS;
-import cmc.data.model.ChiTietHD;
-import cmc.data.model.NhomSP;
+import cmc.data.business.HoaDonBUS;
+import cmc.data.model.HoaDon;
 
 public class HoaDonUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtMaHD;
-	private JTextField txtMaSP;
-	private JTextField txtdongia;
-	private JTextField txtsoLuong;
-	private JTextField txttongTien;
+	private JTextField txtMahd;
+	private JTextField txtMakh;
 	private JTable table;
 	private TableModel tableModel;
 	private JScrollPane scrollPane;
+	private JTextField txtManv;
+	private JTextField txtTongtien;
+	private JTextField txtngay;
 
-	
+	/**
+	 * Launch the application.
+	 */
+
 
 	/**
 	 * Create the frame.
 	 */
 	public HoaDonUI() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 650, 560);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 820, 616);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Quản lí chi tiết hóa đơn");
+		JLabel lblNewLabel = new JLabel("Quản lí sản phẩm");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(159, 10, 357, 58);
+		lblNewLabel.setBounds(279, 0, 357, 58);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblMHD = new JLabel("Mã HĐ");
-		lblMHD.setBounds(26, 74, 45, 13);
-		contentPane.add(lblMHD);
+		JLabel lblMNsp = new JLabel("Mã HD");
+		lblMNsp.setBounds(26, 74, 45, 13);
+		contentPane.add(lblMNsp);
 
-		JLabel lblTSP = new JLabel("Mã SP");
-		lblTSP.setBounds(313, 74, 64, 13);
-		contentPane.add(lblTSP);
-		
-		JLabel lbLDG = new JLabel("Đơn giá");
-		lbLDG.setBounds(26, 98, 45, 13);
-		contentPane.add(lbLDG);
+		JLabel lblTnNsp = new JLabel("Mã KH");
+		lblTnNsp.setBounds(26, 108, 45, 13);
+		contentPane.add(lblTnNsp);
 
-		JLabel lbLSL = new JLabel("Số Lượng");
-		lbLSL.setBounds(313, 98, 64, 13);
-		contentPane.add(lbLSL);
-		
-		JLabel lbLTT = new JLabel("Tổng tiền");
-		lbLTT.setBounds(143, 132, 45, 13);
-		contentPane.add(lbLTT);
-		
+		JLabel lblMNsp_1 = new JLabel("Mã NV");
+		lblMNsp_1.setBounds(26, 139, 45, 13);
+		contentPane.add(lblMNsp_1);
 
-		txtMaHD = new JTextField();
-		txtMaHD.setBounds(81, 70, 202, 19);
-		contentPane.add(txtMaHD);
-		txtMaHD.setColumns(10);
+		JLabel lblnGi = new JLabel("Tổng Tiền");
+		lblnGi.setBounds(349, 74, 45, 13);
+		contentPane.add(lblnGi);
 
-		txtMaSP = new JTextField();
-		txtMaSP.setColumns(10);
-		txtMaSP.setBounds(400, 70, 202, 19);
-		contentPane.add(txtMaSP);
-		
-		txtdongia = new JTextField();
-		txtdongia.setColumns(10);
-		txtdongia.setBounds(81, 94, 202, 19);
-		contentPane.add(txtdongia);
-		
-		txtsoLuong = new JTextField();
-		txtsoLuong.setColumns(10);
-		txtsoLuong.setBounds(400, 94, 202, 19);
-		contentPane.add(txtsoLuong);
-		
-		txttongTien = new JTextField();
-		txttongTien.setColumns(10);
-		txttongTien.setBounds(236, 128, 234, 19);
-		contentPane.add(txttongTien);
+		JLabel lblSLngHng = new JLabel("Ngày");
+		lblSLngHng.setBounds(349, 108, 59, 13);
+		contentPane.add(lblSLngHng);
 
-		List<String> columns = new ArrayList<String>();
-		List<String[]> values = new ArrayList<String[]>();
-
-		columns.add("Mã Hóa Đơn");
-		columns.add("Tên Sản Phẩm");
-		columns.add("Đơn Giá");
-		columns.add("Số Lượng");
-		columns.add("Tổng Tiền");
-
-		/*
-		 * values.add(new String[] { "1", "Đồ gia dụng" }); values.add(new String[] {
-		 * "2", "Đồ gia dụng" }); values.add(new String[] { "3", "Đồ gia dụng" });
-		 */
-
-		ChitietHDBUS chitietHDBUS = new ChitietHDBUS();
-		//Thay bang getall
-		List<ChiTietHD> chiTietHDs = chitietHDBUS.getAll();
-		for (ChiTietHD chiTietHD : chiTietHDs) {
-			values.add(new String[] { String.valueOf(chiTietHD.getMaHD()), String.valueOf(chiTietHD.getMaSP()),String.valueOf(chiTietHD.getDonGia()) , 
-					 String.valueOf(chiTietHD.getSoLuong()),String.valueOf(chiTietHD.getTongTien())});
-			}
-		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
-
+		showTableHoaDon();
 		table = new JTable(tableModel);
+
+		table.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+
+				int row = table.getSelectedRow();
+				TableModel model = table.getModel();
+				txtMahd.setText(model.getValueAt(row, 0).toString());
+				txtMakh.setText(model.getValueAt(row, 1).toString());
+				txtManv.setText(model.getValueAt(row, 2).toString());
+				txtTongtien.setText(model.getValueAt(row, 3).toString());
+				txtngay.setText(model.getValueAt(row, 4).toString());
+				
+			}
+		});
 		table.setFillsViewportHeight(true);
 		table.setBounds(26, 166, 574, 274);
 
@@ -140,7 +112,8 @@ public class HoaDonUI extends JFrame {
 				// do some actions here, for example
 				// print first column value from selected row
 				// System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
-				JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(), 0).toString());
+				// JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(),
+				// 0).toString());
 			}
 		});
 
@@ -149,36 +122,160 @@ public class HoaDonUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (btnNewButton.getText().equals("New")) {
 					btnNewButton.setText("Save");
+
 				} else {
 					// save
-					String maHD = txtMaHD.getText().trim();
-					String maSP = txtMaSP.getText().trim();
-					String donGia = txtdongia.getText().trim();
-					String soLuong = txtsoLuong.getText().trim();
-					String tongTien = txttongTien.getText().trim();
+					// String maNSP = txtMaSP.getText().trim();
+					// String tenNSP = txtTenSP.getText().trim();
 					// and refresh data in table
 				}
 			}
 		});
-		btnNewButton.setBounds(26, 194, 85, 21);
+		btnNewButton.setBounds(26, 174, 85, 21);
 		contentPane.add(btnNewButton);
 
-		JButton button = new JButton("Update");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					HoaDonBUS hoaDonBUS = new HoaDonBUS();
+					HoaDon obj = new HoaDon();
+					obj.setMaHD(Integer.parseInt(txtMahd.getText()));
+					obj.setMaKH(Integer.parseInt(txtMakh.getText()));
+					obj.setMaNV(Integer.parseInt(txtManv.getText()));
+					obj.setTongTien(Float.parseFloat(txtTongtien.getText()));
+					obj.setNgayLHD(Date.valueOf(txtngay.getText()));
+					
+					hoaDonBUS.update(obj);
+					JOptionPane.showMessageDialog(null, "Updated successfully!!!");
+					refreshTable();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Update failed!!!");
+				}
 			}
 		});
-		button.setBounds(155, 194, 85, 21);
-		contentPane.add(button);
+		btnUpdate.setBounds(122, 174, 85, 21);
+		contentPane.add(btnUpdate);
 
-		JButton button_1 = new JButton("Delete");
-		button_1.setBounds(292, 194, 85, 21);
-		contentPane.add(button_1);
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					HoaDonBUS hoaDonBUS = new HoaDonBUS();
+					HoaDon obj = new HoaDon();
+					obj.setMaHD(Integer.parseInt(txtMahd.getText()));
+					obj.setMaKH(Integer.parseInt(txtMakh.getText()));
+					obj.setMaNV(Integer.parseInt(txtManv.getText()));
+					obj.setTongTien(Float.parseFloat(txtTongtien.getText()));
+					obj.setNgayLHD(Date.valueOf(txtngay.getText()));
+					
+					hoaDonBUS.delete(obj);
+					JOptionPane.showMessageDialog(null, "Deleted successfully!!!");
+					clearFieldSanPham();
+					refreshTable();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Delete failed!!!");
+				}
 
-		JButton button_2 = new JButton("Insert");
-		button_2.setBounds(431, 194, 85, 21);
-		contentPane.add(button_2);
+			}
+		});
+		btnDelete.setBounds(217, 174, 85, 21);
+		contentPane.add(btnDelete);
+
+		JButton btnReset = new JButton("Clear");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearFieldSanPham();
+			}
+		});
+		btnReset.setBounds(651, 68, 97, 25);
+		contentPane.add(btnReset);
+
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					HoaDonBUS hoaDonBUS = new HoaDonBUS();
+					HoaDon obj = new HoaDon();
+					obj.setMaHD(0);
+					obj.setMaKH(Integer.parseInt(txtMakh.getText()));
+					obj.setMaNV(Integer.parseInt(txtManv.getText()));
+					obj.setTongTien(Float.parseFloat(txtTongtien.getText()));
+					obj.setNgayLHD(Date.valueOf(txtngay.getText()));
+					
+					
+					hoaDonBUS.insert(obj);
+					JOptionPane.showMessageDialog(null, "Inserted successfully!!!");
+					refreshTable();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Insert failed!!!");
+				}
+			}
+		});
+		btnInsert.setBounds(314, 174, 97, 21);
+		contentPane.add(btnInsert);
+
+		txtMahd = new JTextField();
+		txtMahd.setEditable(false);
+		txtMahd.setBounds(96, 71, 181, 19);
+		contentPane.add(txtMahd);
+		txtMahd.setColumns(10);
+
+		txtMakh = new JTextField();
+		txtMakh.setColumns(10);
+		txtMakh.setBounds(96, 103, 181, 19);
+		contentPane.add(txtMakh);
+
+		txtManv = new JTextField();
+		txtManv.setColumns(10);
+		txtManv.setBounds(96, 134, 181, 19);
+		contentPane.add(txtManv);
+
+		txtTongtien = new JTextField();
+		txtTongtien.setColumns(10);
+		txtTongtien.setBounds(433, 71, 181, 19);
+		contentPane.add(txtTongtien);
+
+		txtngay = new JTextField();
+		txtngay.setColumns(10);
+		txtngay.setBounds(433, 103, 181, 19);
+		contentPane.add(txtngay);
 
 	}
 
+	public void showTableHoaDon() {
+		List<String> columns = new ArrayList<String>();
+		List<String[]> values = new ArrayList<String[]>();
+
+		columns.add("Mã Hóa Đơn");
+		columns.add("Mã Khách Hàng");
+		columns.add("Mã Nhân Viên");
+		columns.add("Tổng Tiền ");
+		columns.add("Ngày Lập Hóa Đơn");
+
+		HoaDonBUS hoaDonBUS = new HoaDonBUS();
+		List<HoaDon> hoaDons = hoaDonBUS.getList(SqlQuerry.SELECT_ALL_HoaDon);
+		for (HoaDon hoaDon : hoaDons) {
+			values.add(new String[] { String.valueOf(hoaDon.getMaHD()), String.valueOf(hoaDon.getMaKH()),
+					String.valueOf(hoaDon.getMaNV()), String.valueOf(hoaDon.getTongTien()),
+					String.valueOf(hoaDon.getNgayLHD()) });
+		}
+		tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
+
+	}
+
+	public void clearFieldSanPham() {
+		txtMahd.setText("Auto-generated");
+		txtMakh.setText("");
+		txtManv.setText("");
+		txtTongtien.setText("");
+		txtngay.setText("");
+		
+	}
+
+	public void refreshTable() {
+		showTableHoaDon();
+		table.setModel(tableModel);
+	}
 }
+
