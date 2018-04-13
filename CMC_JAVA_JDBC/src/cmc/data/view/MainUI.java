@@ -91,7 +91,7 @@ public class MainUI extends JFrame {
 		JButton btnNewButton_5 = new JButton("Chi tiết hóa đơn \r\n");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ChitiethoadonUI frame = new ChitiethoadonUI();
+				ChiTietHDUI frame = new ChiTietHDUI();
 				frame.setVisible(true);
 			}
 		});

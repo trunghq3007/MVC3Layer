@@ -28,7 +28,7 @@ import cmc.data.business.NhomSPBUS;
 import cmc.data.model.ChiTietHD;
 import cmc.data.model.NhomSP;
 
-public class ChitiethoadonUI extends JFrame {
+public class ChiTietHDUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtMaHD;
@@ -45,7 +45,7 @@ public class ChitiethoadonUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChitiethoadonUI() {
+	public ChiTietHDUI() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 650, 560);
 		contentPane = new JPanel();
