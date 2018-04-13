@@ -25,6 +25,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import org.apache.log4j.Logger;
+
 import cmc.data.SqlQuerry;
 import cmc.data.business.SanPhamBUS;
 import cmc.data.model.SanPham;
@@ -39,7 +41,7 @@ import java.awt.event.MouseEvent;
  * @date: Mar 28, 2018
  */
 public class SanPhamUI extends JFrame {
-
+	static Logger log = Logger.getLogger(SanPhamUI.class);
 	private JPanel contentPane;
 	private JTextField txtMaSP;
 	private JTextField txtTenSP;
@@ -55,6 +57,7 @@ public class SanPhamUI extends JFrame {
 	 * Create the frame.
 	 */
 	public SanPhamUI() {
+		log.info("Call SanPham UI!");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 820, 616);
 		contentPane = new JPanel();
@@ -158,8 +161,10 @@ public class SanPhamUI extends JFrame {
 					sanPhamBus.spSanPhamUpdate(obj);
 					JOptionPane.showMessageDialog(null, "Updated successfully!!!");
 					refreshTable();
+					log.info("Update sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Update failed!!!");
+					log.info("Fail to update sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				}
 			}
 		});
@@ -182,8 +187,10 @@ public class SanPhamUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Deleted successfully!!!");
 					clearFieldSanPham();
 					refreshTable();
+					log.info("Delete sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Delete failed!!!");
+					log.info("Fail to sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				}
 				
 			}
@@ -215,8 +222,10 @@ public class SanPhamUI extends JFrame {
 					sanPhamBus.spSanPhamInsert(obj);
 					JOptionPane.showMessageDialog(null, "Inserted successfully!!!");
 					refreshTable();
+					log.info("Insert new sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Insert failed!!!");
+					log.info("Fail to insert new sanPham with maSP= "+Integer.parseInt(txtMaSP.getText()));
 				}
 			}
 		});

@@ -18,14 +18,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.Logger;
+
 import cmc.data.business.KhachHangBUS;
-import cmc.data.business.StudentBUS;
-import cmc.data.dao.KhachHangDAO;
+
 import cmc.data.model.KhachHang;
-import cmc.data.model.Student;
+
+
 import java.awt.Color;
-import javax.swing.JToolBar;
-import javax.swing.JTabbedPane;
+
 
 /**
  * @description:
@@ -47,6 +48,7 @@ public class LoginUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	static Logger log = Logger.getLogger(LoginUI.class);
 
 	public static void main(String[] args) {
 
@@ -71,6 +73,7 @@ public class LoginUI extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginUI() {
+		log.info("Call constructor!");
 		setTitle("Form login");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,15 +129,20 @@ public class LoginUI extends JFrame {
 						checkDangNhap = true;
 						// ManageStudentUI
 						MainUI frame = new MainUI();
+						// location center of screen
+						frame.setLocationRelativeTo(null);
+						frame.setExtendedState(MAXIMIZED_BOTH);
 						frame.setVisible(true);
 						dispose();
 						break;
 					}
 
 				}
+				log.info("Login successfully!");
 				// nếu hết list mà không có student thỏa mãn đăng nhập
 				if (!checkDangNhap) {
 					JOptionPane.showMessageDialog(null, "đăng nhập thất bại");
+					log.info("Login failed!");
 				}
 
 			}
