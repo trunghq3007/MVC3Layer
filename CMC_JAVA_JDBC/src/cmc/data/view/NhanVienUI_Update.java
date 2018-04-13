@@ -89,6 +89,7 @@ public class NhanVienUI_Update extends JFrame {
 		contentPane.add(textField_gender);
 		
 		textField_birthday = new JTextField();
+		textField_birthday.setEnabled(false);
 		textField_birthday.setColumns(10);
 		textField_birthday.setBounds(109, 223, 333, 28);
 		contentPane.add(textField_birthday);
@@ -130,6 +131,7 @@ public class NhanVienUI_Update extends JFrame {
 		contentPane.add(lblGiiTinh);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày sinh");
+		lblNgaySinh.setEnabled(false);
 		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNgaySinh.setBounds(10, 220, 103, 31);
 		contentPane.add(lblNgaySinh);
