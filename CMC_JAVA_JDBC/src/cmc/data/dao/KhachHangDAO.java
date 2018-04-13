@@ -8,16 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import cmc.data.model.KhachHang;
-import cmc.data.model.NhomSP;
-import cmc.data.model.Student;
 import cmc.data.sqlserver.ConnectDB;
 
 public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
-
+	static Logger log = Logger.getLogger(KhachHangDAO.class);
 	KhachHang currentObj;
 	@Override
 	public boolean insert(KhachHang obj) {
+		log.debug("dang o KhacHang DAO thuc hien insert DAO");
+		log.info("dang o KhacHang DAO thuc hien insert DAO");
 		Connection connect = null;
 		String sql = "Insert into KhachHang Values(?,?,?,?,?,?,?)";
 		PreparedStatement prepare = null;
@@ -61,6 +63,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public List<KhachHang> getList(String sql) {
+		log.debug("dang o KhacHang DAO thuc hien getlist DAO");
+		log.info("dang o KhacHang DAO thuc hien getlist DAO");
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet rs = null;
@@ -121,6 +125,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public boolean delete(KhachHang khachhang) {
+		log.debug("dang o KhacHang DAO thuc hien delete DAO");
+		log.info("dang o KhacHang DAO thuc hien delete DAO");
 		Connection connect;
 		int check = 0;
 		try {
@@ -142,6 +148,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public boolean update(KhachHang obj) {
+		log.debug("dang o KhacHang DAO thuc hien update DAO");
+		log.info("dang o KhacHang DAO thuc hien update DAO");
 		Connection connect;
 		int check = 0;
 		try {
@@ -164,6 +172,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public KhachHang getFirst() {
+		log.debug("dang o KhacHang DAO thuc hien getfirst DAO");
+		log.info("dang o KhacHang DAO thuc hien getfirst DAO");
 		List<KhachHang> list = getList("select * from NhomSP");
 		if (list.size() > 0) {
 			return list.get(0);
@@ -173,6 +183,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public KhachHang getLast() {
+		log.debug("dang o KhacHang DAO thuc hien insert getLast");
+		log.info("dang o KhacHang DAO thuc hien insert getLast");
 		List<KhachHang> list = getList("select * from NhomSP");
 		int size = list.size();
 		if (size > 0) {
@@ -183,6 +195,8 @@ public class KhachHangDAO implements BaseDaoInterface<KhachHang>{
 
 	@Override
 	public KhachHang getCurrent() {
+		log.debug("dang o KhacHang DAO thuc hien getCurrent");
+		log.info("dang o KhacHang BUS thuc hien getCurrent");
 		return currentObj;
 	}
 
