@@ -110,7 +110,7 @@ public interface BaseDaoInterface<T> {
 	public void setCurrent(T obj);
 
 	/**
-	 * @description:
+	 * @description: 
 	 * @author: Admin CMC Corporation
 	 * @create_date: Mar 28, 2018
 	 * @modifier: Admin

@@ -29,11 +29,14 @@ import org.apache.log4j.Logger;
 
 import cmc.data.SqlQuerry;
 import cmc.data.business.SanPhamBUS;
+import cmc.data.model.NhomSP;
 import cmc.data.model.SanPham;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import cmc.data.business.NhomSPBUS;
 /**
  * @description:
  * @author: Admin
@@ -48,10 +51,10 @@ public class SanPhamUI extends JFrame {
 	private JTable table;
 	private TableModel tableModel;
 	private JScrollPane scrollPane;
-	private JTextField txtMaNSP;
 	private JTextField txtDonGia;
 	private JTextField txtSoLuongHang;
 	private JTextField txtAnh;
+	private JComboBox<String> comboBoxNSP;
 
 	/**
 	 * Create the frame.
@@ -94,10 +97,24 @@ public class SanPhamUI extends JFrame {
 		JLabel lblLinknh = new JLabel("Link ảnh");
 		lblLinknh.setBounds(349, 139, 59, 13);
 		contentPane.add(lblLinknh);
-
+		
+		//ComboBox
+		NhomSPBUS nhomSPBUS=new NhomSPBUS();
+		List<NhomSP> nhomSPs = nhomSPBUS.getList("xxx");
+		JComboBox<String> comboBoxNSP = new JComboBox<String>();
+		StringBuilder toolTipComboBox =new StringBuilder("Danh sach nhom San Pham: " +"<br>");
+		for (NhomSP nhomSP : nhomSPs) {
+		String abc= ((Integer)nhomSP.getMaNSP()).toString();//+"  "+ nhomSP.getTenNSP();
+		comboBoxNSP.addItem(abc);
+		toolTipComboBox.append(((Integer)nhomSP.getMaNSP()).toString()+" "+nhomSP.getTenNSP()+"<br>");
+		}
+		comboBoxNSP.setToolTipText("<html>"+toolTipComboBox.toString()+ "</html>");
+		comboBoxNSP.setBounds(95, 139, 182, 22);
+		contentPane.add(comboBoxNSP);
+		
+		
 		showTableSanPham();
 		table = new JTable(tableModel);
-
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -106,16 +123,23 @@ public class SanPhamUI extends JFrame {
 				TableModel model = table.getModel();
 				txtMaSP.setText(model.getValueAt(row, 0).toString());
 				txtTenSP.setText(model.getValueAt(row, 1).toString());
-				txtMaNSP.setText(model.getValueAt(row, 2).toString());
+				comboBoxNSP.setSelectedItem(model.getValueAt(row, 2).toString());
+//				comboBoxNSP.set
 				txtDonGia.setText(model.getValueAt(row, 3).toString());
 				txtSoLuongHang.setText(model.getValueAt(row, 4).toString());
 				txtAnh.setText((String) (model.getValueAt(row, 5)));
 
 			}
 		});
+		
+		
 		table.setFillsViewportHeight(true);
 		table.setBounds(26, 166, 574, 274);
 
+		
+		
+		
+		
 		scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(26, 226, 567, 260);
 		contentPane.add(scrollPane);
@@ -129,23 +153,6 @@ public class SanPhamUI extends JFrame {
 			}
 		});
 
-		JButton btnNewButton = new JButton("New");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (btnNewButton.getText().equals("New")) {
-					btnNewButton.setText("Save");
-				
-				} else {
-					// save
-					//String maNSP = txtMaSP.getText().trim();
-				//	String tenNSP = txtTenSP.getText().trim();
-					// and refresh data in table
-				}
-			}
-		});
-		btnNewButton.setBounds(26, 174, 85, 21);
-		contentPane.add(btnNewButton);
-
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +161,7 @@ public class SanPhamUI extends JFrame {
 					SanPham obj = new SanPham();
 					obj.setMaSP(Integer.parseInt(txtMaSP.getText()));
 					obj.setTenSP(txtTenSP.getText());
-					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
+					obj.setMaNSP(Integer.parseInt((String) comboBoxNSP.getSelectedItem()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
@@ -179,7 +186,7 @@ public class SanPhamUI extends JFrame {
 					SanPham obj = new SanPham();
 					obj.setMaSP(Integer.parseInt(txtMaSP.getText()));
 					obj.setTenSP(txtTenSP.getText());
-					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
+					obj.setMaNSP(Integer.parseInt((String) comboBoxNSP.getSelectedItem()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
@@ -215,7 +222,7 @@ public class SanPhamUI extends JFrame {
 					SanPham obj = new SanPham();
 					obj.setMaSP(0);
 					obj.setTenSP(txtTenSP.getText());
-					obj.setMaNSP(Integer.parseInt(txtMaNSP.getText()));
+					obj.setMaNSP(Integer.parseInt((String) comboBoxNSP.getSelectedItem()));
 					obj.setDonGia(Float.parseFloat(txtDonGia.getText()));
 					obj.setSoLuong(Integer.parseInt(txtSoLuongHang.getText()));
 					obj.setAnh(txtAnh.getText());
@@ -243,11 +250,6 @@ public class SanPhamUI extends JFrame {
 		txtTenSP.setBounds(96, 103, 181, 19);
 		contentPane.add(txtTenSP);
 
-		txtMaNSP = new JTextField();
-		txtMaNSP.setColumns(10);
-		txtMaNSP.setBounds(96, 134, 181, 19);
-		contentPane.add(txtMaNSP);
-
 		txtDonGia = new JTextField();
 		txtDonGia.setColumns(10);
 		txtDonGia.setBounds(433, 71, 181, 19);
@@ -262,6 +264,8 @@ public class SanPhamUI extends JFrame {
 		txtAnh.setColumns(10);
 		txtAnh.setBounds(433, 134, 181, 19);
 		contentPane.add(txtAnh);
+		
+		
 
 	}
 
@@ -289,7 +293,7 @@ public class SanPhamUI extends JFrame {
 	public void clearFieldSanPham() {
 		//txtMaSP.setText("Auto-generated");
 		txtTenSP.setText("");
-		txtMaNSP.setText("");
+	 //comboBoxNSP.setSelectedItem("Chon 1 ma nhom SP");//
 		txtDonGia.setText("");
 		txtSoLuongHang.setText("");
 		txtAnh.setText("");		

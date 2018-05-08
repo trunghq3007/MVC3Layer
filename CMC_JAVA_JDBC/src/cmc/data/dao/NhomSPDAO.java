@@ -64,7 +64,7 @@ public class NhomSPDAO implements BaseDaoInterface<NhomSP> {
 			// Statement creation
 			statement = connect.createStatement();
 			// for retrieve data
-			rs = statement.executeQuery(sql);
+			rs = statement.executeQuery("select * from NhomSP");
 			while (rs.next()) {
 				NhomSP nhomSP = new NhomSP();
 				nhomSP.setMaNSP(rs.getInt("maNSP"));
